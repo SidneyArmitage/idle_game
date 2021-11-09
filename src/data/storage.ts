@@ -1,28 +1,52 @@
+import { IObject } from "./types";
 
-enum EStorageCategory {
+export enum EStorageCategory {
   BULK = 0,
   MANUFACTURED = 1,
-  COOLED = 2,
-  LIQUID = 3,
+  EXOTIC = 2,
 };
 
-interface IStorage extends IObject {
+export interface IStorage extends IObject {
   // available space
   available: number;
   // segments - must be less than or equal to available 
   reserved: Record<number, number>;
+  stored: Record<number, number>;
   // accepted items
-  accepted: EStorageCategory;
+  id: EStorageCategory;
 };
+
+export const getFree = (store: IStorage) => 
+  store.available - 
+      Object.values(store.reserved).reduce((acc, cur) => acc + cur, 0) - 
+      Object.keys(store.stored).reduce((acc, cur: unknown) => acc + store.reserved[cur as number] ? 0 : store.stored[cur as number], 0);
 
 // storage functions
 // returns false if the operation is illegal
-const tryReserve = (store: IStorage, key: number, value: number): boolean => {
-  throw Error("Not implemented");
+export const tryReserve = (store: IStorage, key: number, value: number): boolean => {
+  const free = getFree(store);
+  if ((value < store.stored[key] ?? 0) || value < 0 || free < value - Math.max(store.reserved[key] ?? 0, store.stored[key] ?? 0)) {
+    return false;
+  }
+  store.reserved[key] = value;
+  return true;
 };
 
 // returns input if the operation is illegal
 // fill Available shall only work on positive operations
-const tryModify = (store: IStorage, key: number, value: number, fillAvailable: boolean): number => {
-  throw Error("Not implemented");
+export const tryStore = (store: IStorage, key: number, delta: number, fillAvailable: boolean = false): number => {
+  let overflow = 0;
+  let available = store.reserved[key] ?? 0 - store.stored[key] ?? 0;
+  if (!store.reserved[key]) {
+    available = getFree(store);
+  }
+  // for unreserved space
+  if (((store.stored[key] ?? 0) + delta) < 0 || ((store.stored[key] ?? 0) + delta) > available) {
+    if (fillAvailable === false) {
+      return delta;
+    }
+    overflow = Math.min((store.stored[key] ?? 0) + delta, available);
+  }
+  store.stored[key] = (store.stored[key] ?? 0) + delta;
+  return 0 + overflow;
 };

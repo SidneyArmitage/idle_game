@@ -1,4 +1,6 @@
-interface IObject {
+import { EStorageCategory } from "./storage";
+
+export interface IObject {
   description: string;
   name: string;
   // ID shall be used to identify this in the master map
@@ -7,7 +9,9 @@ interface IObject {
   icon: "";
 };
 
-interface IItem extends IObject {
+export interface IItem extends IObject {
   storageCategory: EStorageCategory;
   name: string;
 };
+
+
