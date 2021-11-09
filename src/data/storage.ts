@@ -4,6 +4,7 @@ export enum EStorageCategory {
   BULK = 0,
   MANUFACTURED = 1,
   EXOTIC = 2,
+  POPULATION = 3,
 };
 
 export interface IStorage extends IObject {

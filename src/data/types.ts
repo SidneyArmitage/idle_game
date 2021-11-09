@@ -11,7 +11,6 @@ export interface IObject {
 
 export interface IItem extends IObject {
   storageCategory: EStorageCategory;
-  name: string;
 };
 
 
