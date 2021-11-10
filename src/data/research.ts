@@ -4,12 +4,14 @@
 // * buy more land
 // * upgrade starting state
 
+import { IObject } from "./types";
+
 enum EResearchType {
   PRODUCTION,
   MODIFIER
 };
 
-interface IResearch extends IObject {
+export interface IResearch extends IObject {
   // resources required to unlock once made available through prestige
   required: [number, number];
   prerequisites: number[];

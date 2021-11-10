@@ -1,10 +1,10 @@
 import { IObject } from "./types";
 
 export enum EStorageCategory {
-  BULK = 0,
-  MANUFACTURED = 1,
-  EXOTIC = 2,
-  POPULATION = 3,
+  BULK = 1,
+  MANUFACTURED = 2,
+  EXOTIC = 4,
+  POPULATION = 8,
 };
 
 export interface IStorage extends IObject {

@@ -3,8 +3,8 @@ import { IItem } from "../data/types";
 
 export default [
   {
-    description: "The basic construction material",
-    name: "Wood",
+    description: "Straight from the tree",
+    name: "Log",
     id: 0,
     icon: "",
     storageCategory: EStorageCategory.BULK,

@@ -1,14 +1,10 @@
+import items from "../config/items";
+import { reset } from "../config/reset";
 import { EModifierEffect, EModifierType, Modifiers } from "./modifier";
 import { IProduction } from "./production";
+import { IResearch } from "./research";
 import { EStorageCategory, IStorage } from "./storage";
-import { IItem } from "./types";
-
-interface IClassControlReset {
-  modifier: Modifiers;
-  storage: Record<EStorageCategory, IStorage>;
-  production: [];
-  purchasedResearch: [];
-};
+import { IGetItem, IItem } from "./types";
 
 export class SimulationControl {
   private items: Record<number, IItem>; // static
@@ -36,6 +32,19 @@ export class SimulationControl {
     throw Error("Not implemented");
   }
 
+  // getItems(getAmounts: boolean): IGetItem[];
+  getItems(getAmounts: true, filter: number): IGetItem[];
+  getItems(getAmounts: boolean, filter: number): IItem[] {
+    return Object.values(this.items).filter((item) => (filter & item.storageCategory) > 0).map((item) => (
+      {
+        ...item,
+        ...(getAmounts ? {
+          current: this.storage[item.storageCategory].stored[item.id] ?? 0,
+          max: this.storage[item.storageCategory].reserved[item.id],
+        }: {})
+      }));
+  }
+
   reset() {
     const {storage, production, modifier, purchasedResearch} = reset();
     this.storage = storage;
@@ -44,53 +53,3 @@ export class SimulationControl {
     this.purchasedResearch = purchasedResearch;
   }
 };
-
-export const reset = (): IClassControlReset => {
-  return {
-    storage: {
-      [EStorageCategory.BULK]: {
-        available: 100,
-        description: "Bulk storage for resources with large quantity",
-        name: "Bulk",
-        icon: "",
-        id: EStorageCategory.BULK,
-        reserved: {},
-        stored: {},
-      },
-      [EStorageCategory.MANUFACTURED]: {
-        available: 100,
-        description: "Storage for manufactured goods",
-        icon: "",
-        id: EStorageCategory.MANUFACTURED,
-        name: "Manufactured",
-        reserved: {},
-        stored: {},
-      },
-      [EStorageCategory.EXOTIC]: {
-        available: 100,
-        description: "Storage for perishable or delicate goods",
-        icon: "",
-        id: EStorageCategory.EXOTIC,
-        name: "Exotic",
-        reserved: {},
-        stored: {},
-      },
-      [EStorageCategory.POPULATION]: {
-        available: 3,
-        description: "Where the workers live",
-        icon: "",
-        id: EStorageCategory.POPULATION,
-        name: "Housing",
-        reserved: {},
-        stored: {},
-      },
-    },
-    modifier: {
-      [EModifierType.CATEGORIES]: {},
-      [EModifierType.FOCUSED]: {},
-      [EModifierType.GOODS]: {},
-    },
-    production: [],
-    purchasedResearch: [],
-  };
-}

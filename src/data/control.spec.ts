@@ -1,4 +1,4 @@
-import { reset, SimulationControl } from "./control";
+import { SimulationControl } from "./control";
 import { EModifierType } from "./modifier";
 import { EStorageCategory } from "./storage";
 
