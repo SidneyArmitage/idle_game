@@ -1,9 +1,8 @@
-import items from "../config/items";
 import { reset } from "../config/reset";
 import { EModifierEffect, EModifierType, Modifiers } from "./modifier";
 import { IProduction } from "./production";
 import { IResearch } from "./research";
-import { EStorageCategory, IStorage } from "./storage";
+import { EStorageCategory, getFree, IStorage } from "./storage";
 import { IGetItem, IItem } from "./types";
 
 export class SimulationControl {
@@ -40,9 +39,20 @@ export class SimulationControl {
         ...item,
         ...(getAmounts ? {
           current: this.storage[item.storageCategory].stored[item.id] ?? 0,
-          max: this.storage[item.storageCategory].reserved[item.id],
+          ...(this.storage[item.storageCategory].reserved[item.id] ? {max: this.storage[item.storageCategory].reserved[item.id]} : {})
         }: {})
       }));
+  }
+
+  getItem(key: number) {
+    return this.items[key];
+  }
+
+  getStore(key: EStorageCategory) {
+    return {
+      ...this.storage[key],
+      used: this.storage[key].available - getFree(this.storage[key])
+    };
   }
 
   reset() {

@@ -1,8 +1,17 @@
+import { SimulationControl } from "../../../data/control";
+import { EStorageCategory } from "../../../data/storage";
+import { Store } from "../../store";
 
-export const Summary = () => {
+interface ISummaryProps {
+  control: SimulationControl
+}
+
+export const Summary = ({control}: ISummaryProps) => {
   return (
     <>
-      summary
+      <Store {...control.getStore(EStorageCategory.BULK)}/>
+      <Store {...control.getStore(EStorageCategory.MANUFACTURED)}/>
+      <Store {...control.getStore(EStorageCategory.EXOTIC)}/>
     </>
   );
 };

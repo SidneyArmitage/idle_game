@@ -20,8 +20,8 @@ export const App = () => {
             <Route path="production" element={<Production/>}/>
             <Route path="research" element={<Research/>}/>
             <Route path="storage" element={<Storage/>}>
-              <Route path="" element={<Summary/>}/>
-              {[EStorageCategory.BULK, EStorageCategory.MANUFACTURED, EStorageCategory.EXOTIC].map((value) => <Route key={value} path={`${value}`} element={<Detailed/>}/>)}
+              <Route path="" element={<Summary control={control}/>}/>
+              {[EStorageCategory.BULK, EStorageCategory.MANUFACTURED, EStorageCategory.EXOTIC].map((value) => <Route key={value} path={`${value}`} element={<Detailed control={control} id={value}/>}/>)}
             </Route>
           </Route>
         </Routes>
