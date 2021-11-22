@@ -33,6 +33,7 @@ export class SimulationControl {
 
   // getItems(getAmounts: boolean): IGetItem[];
   getItems(getAmounts: true, filter: number): IGetItem[];
+  getItems(getAmounts: false, filter: number): IItem[];
   getItems(getAmounts: boolean, filter: number): IItem[] {
     return Object.values(this.items).filter((item) => (filter & item.storageCategory) > 0).map((item) => (
       {

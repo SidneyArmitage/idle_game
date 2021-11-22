@@ -11,7 +11,8 @@ export const Item = ({name, description, current, max}: IItemProps) => {
       <h2>{name}</h2>
       <p>{description}</p>
       <p>
-        <span>{current}</span>&nbsp;{max ? (<span>{max}</span>) : ""}</p>
+        <span>{current}</span>&nbsp;{max ? (<span>{max}</span>) : ""}
+      </p>
     </div>
   );
 };
