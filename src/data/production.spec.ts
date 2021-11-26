@@ -181,8 +181,6 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             }
           }
         },
@@ -226,8 +224,6 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             }
           }
         },
@@ -271,8 +267,6 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             }
           }
         },
@@ -316,13 +310,9 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base * 2,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             },
             [EStorageCategory.MANUFACTURED]: {
               value: (base: number) => base * 3,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             }
           }
         },
@@ -381,8 +371,6 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [0]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             }
           }
         },
@@ -425,8 +413,6 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [0]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             }
           }
         },
@@ -469,8 +455,6 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [0]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             }
           }
         },
@@ -513,8 +497,6 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [0]: {
               value: (base: number) => base * 2,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             }
           }
         },
@@ -565,8 +547,6 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [1]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             }
           }
         },
@@ -608,8 +588,6 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [1]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             }
           }
         },
@@ -651,8 +629,6 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [1]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             }
           }
         },
@@ -694,13 +670,9 @@ describe("get consumption", () => {
           [EModifierEffect.CONSUMPTION]: {
             [1]: {
               value: (base: number) => base * 2,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             },
             [2]: {
               value: (base: number) => base * 3,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.CONSUMPTION,
             },
           }
         },
@@ -917,8 +889,6 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             }
           }
         },
@@ -962,8 +932,6 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             }
           }
         },
@@ -1007,8 +975,6 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             }
           }
         },
@@ -1052,13 +1018,9 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base * 2,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             },
             [EStorageCategory.MANUFACTURED]: {
               value: (base: number) => base * 3,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             }
           }
         },
@@ -1117,8 +1079,6 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [0]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             }
           }
         },
@@ -1161,8 +1121,6 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [0]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             }
           }
         },
@@ -1205,8 +1163,6 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [0]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             }
           }
         },
@@ -1249,8 +1205,6 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [0]: {
               value: (base: number) => base * 2,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             }
           }
         },
@@ -1301,8 +1255,6 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [1]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             }
           }
         },
@@ -1344,8 +1296,6 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [1]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             }
           }
         },
@@ -1387,8 +1337,6 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [1]: {
               value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             }
           }
         },
@@ -1430,13 +1378,9 @@ describe("get output", () => {
           [EModifierEffect.OUTPUT]: {
             [1]: {
               value: (base: number) => base * 2,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             },
             [2]: {
               value: (base: number) => base * 3,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.OUTPUT,
             },
           }
         },
@@ -1572,8 +1516,6 @@ describe("get time", () => {
           [EModifierEffect.TIME]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base * 0.9,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
             }
           }
         },
@@ -1617,8 +1559,6 @@ describe("get time", () => {
           [EModifierEffect.TIME]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base * 0.9,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
             }
           }
         },
@@ -1662,8 +1602,6 @@ describe("get time", () => {
           [EModifierEffect.TIME]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base * 0.9,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
             }
           }
         },
@@ -1707,13 +1645,9 @@ describe("get time", () => {
           [EModifierEffect.TIME]: {
             [EStorageCategory.BULK]: {
               value: (base: number) => base * 2,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
             },
             [EStorageCategory.MANUFACTURED]: {
-              value: (base: number) => base * 3,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
+              value: (base: number) => base * 4,
             }
           }
         },
@@ -1734,7 +1668,7 @@ describe("get time", () => {
         description: "",
         icon: "",
         amount: 1,
-        consumption: [[1, 10], [2, 12]],
+        consumption: [[1, 10], [2, 30]],
         output: [],
         time: 1,
         progress: 0,
@@ -1750,12 +1684,12 @@ describe("get time", () => {
         2: {
           description: "",
           icon: "",
-          id: 1,
+          id: 2,
           name: "",
           storageCategory: EStorageCategory.MANUFACTURED,
         },
       };
-      expect(getTime(production, modifiers as Modifiers, items)).toStrictEqual([[1, 20], [2, 36]]);
+      expect(getTime(production, modifiers as Modifiers, items)).toBe(3.5);
     });
 
   });
@@ -1771,9 +1705,7 @@ describe("get time", () => {
         [EModifierType.FOCUSED]: {
           [EModifierEffect.TIME]: {
             [0]: {
-              value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
+              value: (base: number) => base * 2,
             }
           }
         },
@@ -1803,7 +1735,7 @@ describe("get time", () => {
           storageCategory: EStorageCategory.BULK,
         },
       };
-      expect(getTime(production, modifiers as Modifiers, items)).toStrictEqual([[1, 0]]);
+      expect(getTime(production, modifiers as Modifiers, items)).toBe(0);
     });
 
     it("has no inputs", () => {
@@ -1815,9 +1747,7 @@ describe("get time", () => {
         [EModifierType.FOCUSED]: {
           [EModifierEffect.TIME]: {
             [0]: {
-              value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
+              value: (base: number) => base * 2,
             }
           }
         },
@@ -1847,7 +1777,7 @@ describe("get time", () => {
           storageCategory: EStorageCategory.BULK,
         },
       };
-      expect(getTime(production, modifiers as Modifiers, items).length).toBe(0);
+      expect(getTime(production, modifiers as Modifiers, items)).toBe(2);
     });
 
     it("has one input", () => {
@@ -1859,9 +1789,7 @@ describe("get time", () => {
         [EModifierType.FOCUSED]: {
           [EModifierEffect.TIME]: {
             [0]: {
-              value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
+              value: (base: number) => base * 0.9,
             }
           }
         },
@@ -1891,51 +1819,7 @@ describe("get time", () => {
           storageCategory: EStorageCategory.BULK,
         },
       };
-      expect(getTime(production, modifiers as Modifiers, items)).toStrictEqual([[1, 20]]);
-    });
-
-    it("has 2 inputs", () => {
-      const modifiers: unknown = {
-        [EModifierType.CATEGORIES]: {
-          [EModifierEffect.TIME]: {
-          }
-        },
-        [EModifierType.FOCUSED]: {
-          [EModifierEffect.TIME]: {
-            [0]: {
-              value: (base: number) => base * 2,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
-            }
-          }
-        },
-        [EModifierType.GOODS]: {
-          [EModifierEffect.TIME]: {
-
-          }
-        },
-      };
-      const production: IProduction = {
-        id: 0,
-        name: "",
-        description: "",
-        icon: "",
-        amount: 1,
-        consumption: [[1, 10], [2, 12]],
-        output: [],
-        time: 1,
-        progress: 0,
-      };
-      const items: Record<number, IItem> = {
-        1: {
-          description: "",
-          icon: "",
-          id: 1,
-          name: "",
-          storageCategory: EStorageCategory.BULK,
-        },
-      };
-      expect(getTime(production, modifiers as Modifiers, items)).toStrictEqual([[1, 20], [2, 24]]);
+      expect(getTime(production, modifiers as Modifiers, items)).toBe(0.9);
     });
 
   });
@@ -1955,9 +1839,7 @@ describe("get time", () => {
         [EModifierType.GOODS]: {
           [EModifierEffect.TIME]: {
             [1]: {
-              value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
+              value: (base: number) => base * 0.5,
             }
           }
         },
@@ -1982,7 +1864,7 @@ describe("get time", () => {
           storageCategory: EStorageCategory.BULK,
         },
       };
-      expect(getTime(production, modifiers as Modifiers, items)).toStrictEqual([[1, 0]]);
+      expect(getTime(production, modifiers as Modifiers, items)).toBe(0);
     });
 
     it("has no inputs", () => {
@@ -1998,9 +1880,7 @@ describe("get time", () => {
         [EModifierType.GOODS]: {
           [EModifierEffect.TIME]: {
             [1]: {
-              value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
+              value: (base: number) => base * 0.5,
             }
           }
         },
@@ -2025,7 +1905,7 @@ describe("get time", () => {
           storageCategory: EStorageCategory.BULK,
         },
       };
-      expect(getTime(production, modifiers as Modifiers, items).length).toBe(0);
+      expect(getTime(production, modifiers as Modifiers, items)).toBe(1);
     });
 
     it("has one input", () => {
@@ -2041,9 +1921,7 @@ describe("get time", () => {
         [EModifierType.GOODS]: {
           [EModifierEffect.TIME]: {
             [1]: {
-              value: (base: number) => base + 10,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
+              value: (base: number) => base * 0.5,
             }
           }
         },
@@ -2068,7 +1946,7 @@ describe("get time", () => {
           storageCategory: EStorageCategory.BULK,
         },
       };
-      expect(getTime(production, modifiers as Modifiers, items)).toStrictEqual([[1, 20]]);
+      expect(getTime(production, modifiers as Modifiers, items)).toBe(0.5);
     });
 
     it("has 2 inputs", () => {
@@ -2084,14 +1962,10 @@ describe("get time", () => {
         [EModifierType.GOODS]: {
           [EModifierEffect.TIME]: {
             [1]: {
-              value: (base: number) => base * 2,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
+              value: (base: number) => base * 0.5,
             },
             [2]: {
-              value: (base: number) => base * 3,
-              type: EModifierType.CATEGORIES,
-              effects: EModifierEffect.TIME,
+              value: (base: number) => base * 1,
             },
           }
         },
@@ -2102,7 +1976,7 @@ describe("get time", () => {
         description: "",
         icon: "",
         amount: 1,
-        consumption: [[1, 10], [2, 12]],
+        consumption: [[1, 10], [2, 30]],
         output: [],
         time: 1,
         progress: 0,
@@ -2123,9 +1997,24 @@ describe("get time", () => {
           storageCategory: EStorageCategory.BULK,
         },
       };
-      expect(getTime(production, modifiers as Modifiers, items)).toStrictEqual([[1, 20], [2, 36]]);
+      expect(getTime(production, modifiers as Modifiers, items)).toBe(0.875);
     });
 
+  });
+
+  describe("multiple modifiers", () => {
+
+    it("compounds category & focused", () => {
+
+    });
+
+    it("compounds focused & goods", () => {
+
+    });
+
+    it("compounds category & goods", () => {
+
+    });
   });
 
 });

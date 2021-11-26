@@ -62,10 +62,17 @@ export const getTime = (production: IProduction, modifiers: Modifiers, items: Re
     return 0;
   }
   const list = [...production.consumption, ...production.output];
+  let output = 0;
   if (list.length === 0) {
-    return production.time;
+    output = production.time;
+    output = (modifiers[EModifierType.FOCUSED][EModifierEffect.TIME][production.id]?.value ?? identityModifier)(output);
+  } else {
+    const inverseSize = 1 / list.reduce((acc, cur) => acc + cur[1], 0);
+    output = list.reduce((acc, cur) => acc + inverseSize * (cur[1] * (modifiers[EModifierType.CATEGORIES][EModifierEffect.TIME][items[cur[0]].storageCategory]?.value ?? identityModifier)(production.time)), 0);
+    output = (modifiers[EModifierType.FOCUSED][EModifierEffect.TIME][production.id]?.value ?? identityModifier)(output);
+    output = list.reduce((acc, cur) => acc + inverseSize * (cur[1] * (modifiers[EModifierType.GOODS][EModifierEffect.TIME][cur[0]]?.value ?? identityModifier)(output)), 0);
   }
-  return list.reduce((acc, cur) => acc + (modifiers[EModifierType.CATEGORIES][EModifierEffect.TIME][cur[0]].value ?? identityModifier)(production.time), 0);
+  return output;
 };
 
 export const tryStartProduction = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>, storage: Record<EStorageCategory, IStorage>): boolean => {

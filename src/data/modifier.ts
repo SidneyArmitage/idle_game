@@ -18,8 +18,6 @@ export enum EModifierEffect {
 // modifiers can be upgraded
 export interface IModifier extends IObject {
   value: (base: number) => number;
-  type: EModifierType;
-  effects: EModifierEffect;
 };
 
 export type Modifiers = Record<EModifierType, Record<EModifierEffect, Record<number, IModifier>>>;
