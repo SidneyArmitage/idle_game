@@ -29,13 +29,8 @@ export const getConsumption = (production: IProduction, modifiers: Modifiers, it
   const focusedModifier = modifiers[EModifierType.FOCUSED][EModifierEffect.CONSUMPTION][0]?.value ?? identityModifier;
   return production.consumption.map((element) => {
     const item = items[element[0]];
-    let itemModifier = identityModifier;
-    let goodsModifier = identityModifier;
-
-    if (item !== undefined) {
-      itemModifier = modifiers[EModifierType.CATEGORIES][EModifierEffect.CONSUMPTION][item.storageCategory]?.value ?? identityModifier;
-      goodsModifier = modifiers[EModifierType.GOODS][EModifierEffect.CONSUMPTION][item.id]?.value ?? identityModifier;
-    }
+    const itemModifier = modifiers[EModifierType.CATEGORIES][EModifierEffect.CONSUMPTION][item?.storageCategory]?.value ?? identityModifier;
+    const goodsModifier = modifiers[EModifierType.GOODS][EModifierEffect.CONSUMPTION][item?.id]?.value ?? identityModifier;
     return [element[0], goodsModifier(focusedModifier(itemModifier(element[1]))) * production.amount];
   });
 };

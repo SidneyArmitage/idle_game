@@ -528,6 +528,95 @@ describe("get consumption", () => {
       };
       expect(getConsumption(production, modifiers as Modifiers, items)).toStrictEqual([[1, 20], [2, 24]]);
     });
+    
+    it("has focused and category", () => {
+      const modifiers: unknown = {
+        [EModifierType.CATEGORIES]: {
+          [EModifierEffect.CONSUMPTION]: {
+            [EStorageCategory.BULK]: {
+              value: (base: number) => base * 2,
+            }
+          }
+        },
+        [EModifierType.FOCUSED]: {
+          [EModifierEffect.CONSUMPTION]: {
+            [0]: {
+              value: (base: number) => base + 10,
+            }
+          }
+        },
+        [EModifierType.GOODS]: {
+          [EModifierEffect.CONSUMPTION]: {
+
+          }
+        },
+      };
+      const production: IProduction = {
+        id: 0,
+        name: "",
+        description: "",
+        icon: "",
+        amount: 1,
+        output: [],
+        consumption: [[1, 10]],
+        time: 1,
+        progress: 0,
+      };
+      const items: Record<number, IItem> = {
+        1: {
+          description: "",
+          icon: "",
+          id: 1,
+          name: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+      };
+      expect(getConsumption(production, modifiers as Modifiers, items)).toStrictEqual([[1, 30]]);
+    });
+
+    it("has focused and goods", () => {
+      const modifiers: unknown = {
+        [EModifierType.CATEGORIES]: {
+          [EModifierEffect.CONSUMPTION]: {
+          }
+        },
+        [EModifierType.FOCUSED]: {
+          [EModifierEffect.CONSUMPTION]: {
+            [0]: {
+              value: (base: number) => base + 10,
+            }
+          }
+        },
+        [EModifierType.GOODS]: {
+          [EModifierEffect.CONSUMPTION]: {
+            [1]: {
+              value: (base: number) => base * 2,
+            }
+          }
+        },
+      };
+      const production: IProduction = {
+        id: 0,
+        name: "",
+        description: "",
+        icon: "",
+        amount: 1,
+        output: [],
+        consumption: [[1, 10]],
+        time: 1,
+        progress: 0,
+      };
+      const items: Record<number, IItem> = {
+        1: {
+          description: "",
+          icon: "",
+          id: 1,
+          name: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+      };
+      expect(getConsumption(production, modifiers as Modifiers, items)).toStrictEqual([[1, 40]]);
+    });
 
   });
 
@@ -1235,6 +1324,95 @@ describe("get output", () => {
         },
       };
       expect(getOutput(production, modifiers as Modifiers, items)).toStrictEqual([[1, 20], [2, 24]]);
+    });
+
+    it("has focused and category", () => {
+      const modifiers: unknown = {
+        [EModifierType.CATEGORIES]: {
+          [EModifierEffect.OUTPUT]: {
+            [EStorageCategory.BULK]: {
+              value: (base: number) => base * 2,
+            }
+          }
+        },
+        [EModifierType.FOCUSED]: {
+          [EModifierEffect.OUTPUT]: {
+            [0]: {
+              value: (base: number) => base + 10,
+            }
+          }
+        },
+        [EModifierType.GOODS]: {
+          [EModifierEffect.OUTPUT]: {
+
+          }
+        },
+      };
+      const production: IProduction = {
+        id: 0,
+        name: "",
+        description: "",
+        icon: "",
+        amount: 1,
+        output: [[1, 10]],
+        consumption: [],
+        time: 1,
+        progress: 0,
+      };
+      const items: Record<number, IItem> = {
+        1: {
+          description: "",
+          icon: "",
+          id: 1,
+          name: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+      };
+      expect(getOutput(production, modifiers as Modifiers, items)).toStrictEqual([[1, 30]]);
+    });
+
+    it("has focused and goods", () => {
+      const modifiers: unknown = {
+        [EModifierType.CATEGORIES]: {
+          [EModifierEffect.OUTPUT]: {
+          }
+        },
+        [EModifierType.FOCUSED]: {
+          [EModifierEffect.OUTPUT]: {
+            [0]: {
+              value: (base: number) => base + 10,
+            }
+          }
+        },
+        [EModifierType.GOODS]: {
+          [EModifierEffect.OUTPUT]: {
+            [1]: {
+              value: (base: number) => base * 2,
+            }
+          }
+        },
+      };
+      const production: IProduction = {
+        id: 0,
+        name: "",
+        description: "",
+        icon: "",
+        amount: 1,
+        output: [[1, 10]],
+        consumption: [],
+        time: 1,
+        progress: 0,
+      };
+      const items: Record<number, IItem> = {
+        1: {
+          description: "",
+          icon: "",
+          id: 1,
+          name: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+      };
+      expect(getOutput(production, modifiers as Modifiers, items)).toStrictEqual([[1, 40]]);
     });
 
   });
@@ -2005,15 +2183,135 @@ describe("get time", () => {
   describe("multiple modifiers", () => {
 
     it("compounds category & focused", () => {
-
+      const modifiers: unknown = {
+        [EModifierType.CATEGORIES]: {
+          [EModifierEffect.TIME]: {
+            [EStorageCategory.BULK]: {
+              value: (base: number) => base * 0.5,
+            }
+          }
+        },
+        [EModifierType.FOCUSED]: {
+          [EModifierEffect.TIME]: {
+            [0]: {
+              value: (base: number) => base * 0.5,
+            }
+          }
+        },
+        [EModifierType.GOODS]: {
+          [EModifierEffect.TIME]: {
+          }
+        },
+      };
+      const production: IProduction = {
+        id: 0,
+        name: "",
+        description: "",
+        icon: "",
+        amount: 1,
+        consumption: [[1, 10]],
+        output: [],
+        time: 1,
+        progress: 0,
+      };
+      const items: Record<number, IItem> = {
+        1: {
+          description: "",
+          icon: "",
+          id: 1,
+          name: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+      };
+      expect(getTime(production, modifiers as Modifiers, items)).toBe(0.25);
     });
 
     it("compounds focused & goods", () => {
-
+      const modifiers: unknown = {
+        [EModifierType.CATEGORIES]: {
+          [EModifierEffect.TIME]: {
+          }
+        },
+        [EModifierType.FOCUSED]: {
+          [EModifierEffect.TIME]: {
+            [0]: {
+              value: (base: number) => base * 0.5,
+            }
+          }
+        },
+        [EModifierType.GOODS]: {
+          [EModifierEffect.TIME]: {
+            [1]: {
+              value: (base: number) => base * 0.5,
+            }
+          }
+        },
+      };
+      const production: IProduction = {
+        id: 0,
+        name: "",
+        description: "",
+        icon: "",
+        amount: 1,
+        consumption: [[1, 10]],
+        output: [],
+        time: 1,
+        progress: 0,
+      };
+      const items: Record<number, IItem> = {
+        1: {
+          description: "",
+          icon: "",
+          id: 1,
+          name: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+      };
+      expect(getTime(production, modifiers as Modifiers, items)).toBe(0.25);
     });
 
     it("compounds category & goods", () => {
-
+      const modifiers: unknown = {
+        [EModifierType.CATEGORIES]: {
+          [EModifierEffect.TIME]: {
+            [EStorageCategory.BULK]: {
+              value: (base: number) => base * 0.5,
+            }
+          }
+        },
+        [EModifierType.FOCUSED]: {
+          [EModifierEffect.TIME]: {
+          }
+        },
+        [EModifierType.GOODS]: {
+          [EModifierEffect.TIME]: {
+            [1]: {
+              value: (base: number) => base * 0.5,
+            }
+          }
+        },
+      };
+      const production: IProduction = {
+        id: 0,
+        name: "",
+        description: "",
+        icon: "",
+        amount: 1,
+        consumption: [[1, 10]],
+        output: [],
+        time: 1,
+        progress: 0,
+      };
+      const items: Record<number, IItem> = {
+        1: {
+          description: "",
+          icon: "",
+          id: 1,
+          name: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+      };
+      expect(getTime(production, modifiers as Modifiers, items)).toBe(0.25);
     });
   });
 

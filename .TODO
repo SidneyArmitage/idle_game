@@ -1,4 +1,4 @@
 tests:
-  ☐ Multiple production scenario e.g. focused, goods
-  ☐ Multiple production scenario e.g. focused, goods and Categories
+  ✔ Multiple production scenario e.g. focused, goods @done(21-11-28 08:15)
+  ✔ Multiple production scenario e.g. focused, goods and Categories @done(21-11-28 08:15)
 ☐ implement: https://www.joshwcomeau.com/css/custom-css-reset/
