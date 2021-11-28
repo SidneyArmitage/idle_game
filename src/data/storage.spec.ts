@@ -6,7 +6,7 @@ describe("try reserve", () => {
 
     it("reserves a new partition", () => {
       const store: IStorage = {
-        id:EStorageCategory.BULK,
+        id: EStorageCategory.BULK,
         name: "",
         available: 1000,
         description: "",
@@ -222,9 +222,8 @@ describe("try store", () => {
         description: "",
         icon: "",
         reserved: {},
-        stored: {},
+        stored: {0: 200},
       };
-      expect(tryStore(store, 0, 200)).toBe(0);
       expect(tryStore(store, 0, 900)).toBe(900);
       expect(store.stored[0]).toBe(200);
     });

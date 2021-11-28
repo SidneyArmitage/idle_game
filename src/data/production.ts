@@ -1,5 +1,5 @@
 import { EModifierEffect, EModifierType, Modifiers } from "./modifier";
-import { EStorageCategory, IStorage } from "./storage";
+import { EStorageCategory, IStorage, tryStore } from "./storage";
 import { IObject, IItem } from "./types";
 
 enum EProductionCategory {
@@ -70,6 +70,13 @@ export const getTime = (production: IProduction, modifiers: Modifiers, items: Re
   return output;
 };
 
-export const tryStartProduction = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>, storage: Record<EStorageCategory, IStorage>): boolean => {
-  throw Error("Not implemented");
+export const testStartProduction = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>, storage: Record<EStorageCategory, IStorage>): boolean => {
+  const consumption = getConsumption(production, modifiers, items);
+  if (consumption.every(([id, count]) => (storage[items[id]?.storageCategory]?.stored[id] ?? Number.MIN_SAFE_INTEGER) >= count)) {
+    consumption.forEach(([id, count]) => {
+      tryStore(storage[items[id].storageCategory], id, -count);
+    });
+    return true;
+  }
+  return false;
 };

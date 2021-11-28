@@ -1,6 +1,6 @@
 import { EModifierEffect, EModifierType, Modifiers } from "./modifier";
-import { getConsumption, getOutput, getTime, IProduction } from "./production";
-import { EStorageCategory } from "./storage";
+import { getConsumption, getOutput, getTime, IProduction, testStartProduction } from "./production";
+import { EStorageCategory, IStorage } from "./storage";
 import { IItem } from "./types";
 
 describe("get consumption", () => {
@@ -2313,6 +2313,221 @@ describe("get time", () => {
       };
       expect(getTime(production, modifiers as Modifiers, items)).toBe(0.25);
     });
+  });
+
+});
+
+describe("try start production", () => {
+  
+  describe("it can produce", () => {
+
+    it("amount is equal", () => {
+      const modifiers: unknown = {
+        [EModifierType.CATEGORIES]: {
+          [EModifierEffect.CONSUMPTION]: {
+
+          }
+        },
+        [EModifierType.FOCUSED]: {
+          [EModifierEffect.CONSUMPTION]: {
+
+          }
+        },
+        [EModifierType.GOODS]: {
+          [EModifierEffect.CONSUMPTION]: {
+
+          },
+        },
+      };
+      const production: IProduction = {
+        id: 0,
+        name: "",
+        description: "",
+        icon: "",
+        amount: 1,
+        consumption: [[1, 10]],
+        output: [[2, 5]],
+        time: 1,
+        progress: 0,
+      };
+      const items: Record<number, IItem> = {
+        1: {
+          description: "",
+          icon: "",
+          id: 1,
+          name: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+        2: {
+          description: "",
+          icon: "",
+          id: 2,
+          name: "",
+          storageCategory: EStorageCategory.MANUFACTURED,
+        },
+      };
+      const storage: unknown = {
+        [EStorageCategory.BULK]: {
+          description: "",
+          icon: "",
+          id: EStorageCategory.BULK,
+          available: 1000,
+          name: "",
+          stored: {1: 10},
+          reserved: {},
+        },
+        [EStorageCategory.MANUFACTURED]: {
+          description: "",
+          icon: "",
+          id: EStorageCategory.MANUFACTURED,
+          available: 1000,
+          name: "",
+          stored: {},
+          reserved: {},
+        },
+      };
+      expect(testStartProduction(production, modifiers as Modifiers, items, storage as Record<EStorageCategory, IStorage>)).toBe(true);
+    });
+
+    it("amount is less", () => {
+      const modifiers: unknown = {
+        [EModifierType.CATEGORIES]: {
+          [EModifierEffect.CONSUMPTION]: {
+
+          }
+        },
+        [EModifierType.FOCUSED]: {
+          [EModifierEffect.CONSUMPTION]: {
+
+          }
+        },
+        [EModifierType.GOODS]: {
+          [EModifierEffect.CONSUMPTION]: {
+
+          },
+        },
+      };
+      const production: IProduction = {
+        id: 0,
+        name: "",
+        description: "",
+        icon: "",
+        amount: 1,
+        consumption: [[1, 10]],
+        output: [[2, 5]],
+        time: 1,
+        progress: 0,
+      };
+      const items: Record<number, IItem> = {
+        1: {
+          description: "",
+          icon: "",
+          id: 1,
+          name: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+        2: {
+          description: "",
+          icon: "",
+          id: 2,
+          name: "",
+          storageCategory: EStorageCategory.MANUFACTURED,
+        },
+      };
+      const storage: unknown = {
+        [EStorageCategory.BULK]: {
+          description: "",
+          icon: "",
+          id: EStorageCategory.BULK,
+          available: 1000,
+          name: "",
+          stored: {1: 11},
+          reserved: {},
+        },
+        [EStorageCategory.MANUFACTURED]: {
+          description: "",
+          icon: "",
+          id: EStorageCategory.MANUFACTURED,
+          available: 1000,
+          name: "",
+          stored: {},
+          reserved: {},
+        },
+      };
+      expect(testStartProduction(production, modifiers as Modifiers, items, storage as Record<EStorageCategory, IStorage>)).toBe(true);
+    });
+  });
+
+  describe("it is unable to produce", () => {
+
+    it("does not have enough resources", () => {
+      const modifiers: unknown = {
+        [EModifierType.CATEGORIES]: {
+          [EModifierEffect.CONSUMPTION]: {
+    
+          }
+        },
+        [EModifierType.FOCUSED]: {
+          [EModifierEffect.CONSUMPTION]: {
+    
+          }
+        },
+        [EModifierType.GOODS]: {
+          [EModifierEffect.CONSUMPTION]: {
+    
+          }
+        },
+      };
+      const production: IProduction = {
+        id: 0,
+        name: "",
+        description: "",
+        icon: "",
+        amount: 1,
+        consumption: [[1, 10]],
+        output: [[2, 5]],
+        time: 1,
+        progress: 0,
+      };
+      const items: Record<number, IItem> = {
+        1: {
+          description: "",
+          icon: "",
+          id: 1,
+          name: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+        2: {
+          description: "",
+          icon: "",
+          id: 2,
+          name: "",
+          storageCategory: EStorageCategory.MANUFACTURED,
+        },
+      };
+      const storage: unknown = {
+        [EStorageCategory.BULK]: {
+          description: "",
+          icon: "",
+          id: EStorageCategory.BULK,
+          available: 1000,
+          name: "",
+          stored: {1: 10},
+          reserved: {},
+        },
+        [EStorageCategory.MANUFACTURED]: {
+          description: "",
+          icon: "",
+          id: EStorageCategory.MANUFACTURED,
+          available: 1000,
+          name: "",
+          stored: {},
+          reserved: {},
+        },
+      };
+      expect(testStartProduction(production, modifiers as Modifiers, items, storage as Record<EStorageCategory, IStorage>)).toBe(true);
+    });
+
   });
 
 });
