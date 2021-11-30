@@ -26,7 +26,7 @@ export interface IProduction extends IObject {
 const identityModifier = (base: number) => base;
 
 export const getConsumption = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>): [number, number][] => {
-  const focusedModifier = modifiers[EModifierType.FOCUSED][EModifierEffect.CONSUMPTION][0]?.value ?? identityModifier;
+  const focusedModifier = modifiers[EModifierType.FOCUSED][EModifierEffect.CONSUMPTION][production.id]?.value ?? identityModifier;
   return production.consumption.map((element) => {
     const item = items[element[0]];
     const itemModifier = modifiers[EModifierType.CATEGORIES][EModifierEffect.CONSUMPTION][item?.storageCategory]?.value ?? identityModifier;
@@ -36,15 +36,15 @@ export const getConsumption = (production: IProduction, modifiers: Modifiers, it
 };
 
 export const getOutput = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>) => {
-  const focusedModifier = modifiers[EModifierType.FOCUSED][EModifierEffect.OUTPUT][0]?.value ?? identityModifier;
+  const focusedModifier = modifiers[EModifierEffect.OUTPUT][EModifierType.FOCUSED][production.id]?.value ?? identityModifier;
   return production.output.map((element) => {
     const item = items[element[0]];
     let itemModifier = identityModifier;
     let goodsModifier = identityModifier;
 
     if (item !== undefined) {
-      itemModifier = modifiers[EModifierType.CATEGORIES][EModifierEffect.OUTPUT][item.storageCategory]?.value ?? identityModifier;
-      goodsModifier = modifiers[EModifierType.GOODS][EModifierEffect.OUTPUT][item.id]?.value ?? identityModifier;
+      itemModifier = modifiers[EModifierEffect.OUTPUT][EModifierType.CATEGORIES][item.storageCategory]?.value ?? identityModifier;
+      goodsModifier = modifiers[EModifierEffect.OUTPUT][EModifierType.GOODS][item.id]?.value ?? identityModifier;
     }
     return [element[0], goodsModifier(focusedModifier(itemModifier(element[1]))) * production.amount];
   });
@@ -60,12 +60,12 @@ export const getTime = (production: IProduction, modifiers: Modifiers, items: Re
   let output = 0;
   if (list.length === 0) {
     output = production.time;
-    output = (modifiers[EModifierType.FOCUSED][EModifierEffect.TIME][production.id]?.value ?? identityModifier)(output);
+    output = (modifiers[EModifierEffect.TIME][EModifierType.FOCUSED][production.id]?.value ?? identityModifier)(output);
   } else {
     const inverseSize = 1 / list.reduce((acc, cur) => acc + cur[1], 0);
-    output = list.reduce((acc, cur) => acc + inverseSize * (cur[1] * (modifiers[EModifierType.CATEGORIES][EModifierEffect.TIME][items[cur[0]].storageCategory]?.value ?? identityModifier)(production.time)), 0);
-    output = (modifiers[EModifierType.FOCUSED][EModifierEffect.TIME][production.id]?.value ?? identityModifier)(output);
-    output = list.reduce((acc, cur) => acc + inverseSize * (cur[1] * (modifiers[EModifierType.GOODS][EModifierEffect.TIME][cur[0]]?.value ?? identityModifier)(output)), 0);
+    output = list.reduce((acc, cur) => acc + inverseSize * (cur[1] * (modifiers[EModifierEffect.TIME][EModifierType.CATEGORIES][items[cur[0]].storageCategory]?.value ?? identityModifier)(production.time)), 0);
+    output = (modifiers[EModifierEffect.TIME][EModifierType.FOCUSED][production.id]?.value ?? identityModifier)(output);
+    output = list.reduce((acc, cur) => acc + inverseSize * (cur[1] * (modifiers[EModifierEffect.TIME][EModifierType.GOODS][cur[0]]?.value ?? identityModifier)(output)), 0);
   }
   return output;
 };
@@ -79,4 +79,9 @@ export const testStartProduction = (production: IProduction, modifiers: Modifier
     return true;
   }
   return false;
+};
+
+// Step based production method
+export const produce = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>, storage: Record<EStorageCategory, IStorage>, delta: number) => {
+
 };

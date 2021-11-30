@@ -20,4 +20,32 @@ export interface IModifier extends IObject {
   value: (base: number) => number;
 };
 
-export type Modifiers = Record<EModifierType, Record<EModifierEffect, Record<number, IModifier>>>;
+export type Modifiers = Record<EModifierEffect, Record<EModifierType, Record<number, IModifier>>>;
+
+export const initModifiers = (): Modifiers => ({
+  [EModifierEffect.CONSUMPTION]: {
+    [EModifierType.CATEGORIES]: {},
+    [EModifierType.FOCUSED]: {},
+    [EModifierType.GOODS]: {},
+  },
+  [EModifierEffect.OUTPUT]: {
+    [EModifierType.CATEGORIES]: {},
+    [EModifierType.FOCUSED]: {},
+    [EModifierType.GOODS]: {},
+  },
+  [EModifierEffect.REQUIRED]: {
+    [EModifierType.CATEGORIES]: {},
+    [EModifierType.FOCUSED]: {},
+    [EModifierType.GOODS]: {},
+  },
+  [EModifierEffect.TIME]: {
+    [EModifierType.CATEGORIES]: {},
+    [EModifierType.FOCUSED]: {},
+    [EModifierType.GOODS]: {},
+  },
+  [EModifierEffect.STORAGE]: {
+    [EModifierType.CATEGORIES]: {},
+    [EModifierType.FOCUSED]: {},
+    [EModifierType.GOODS]: {},
+  },
+});
