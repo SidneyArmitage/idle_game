@@ -30,4 +30,11 @@ export default [
     icon: "",
     storageCategory: EStorageCategory.POPULATION,
   },
+  {
+    description: "Logs that are cut down to dimensions to be more usable for fine products",
+    name: "Plank",
+    id: 4,
+    icon: "",
+    storageCategory: EStorageCategory.BULK,
+  },
 ] as IItem[];

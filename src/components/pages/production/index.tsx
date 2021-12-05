@@ -8,8 +8,8 @@ interface IProductionProps {
 export const Production = ({control}: IProductionProps) => {
   return (
     <>
-      <h1>production</h1>
-      {control.getProductions().map((production) => (<Producer control={control} {...production}/>))}
+      <h1>Production</h1>
+      {control.getProductions().map((production) => (<Producer key={production.id} control={control} {...production}/>))}
     </>
   );
 };

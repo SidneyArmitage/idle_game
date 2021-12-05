@@ -13,7 +13,7 @@ export const Detailed = ({control, id}: IDetailedProps) => {
   // @ts-ignore
   const itemList = Array.from(new Set([...Object.keys(store.reserved), ...Object.keys(store.stored)])) as number[];
   return (
-    <>
+    <div className={"expanded"}>
       <h2>{store.name}</h2>
       <p>{store.description}</p>
       <p>
@@ -26,6 +26,6 @@ export const Detailed = ({control, id}: IDetailedProps) => {
           ...control.getItem(key),
           }}/>))}
       </div>
-    </>
+    </div>
   );
 };

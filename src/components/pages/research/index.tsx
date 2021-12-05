@@ -1,7 +1,7 @@
 export const Research = () => {
   return (
     <>
-      research
+      <h1>Research</h1>
     </>
   );
 };
