@@ -1,4 +1,4 @@
-import { EModifierType, Modifiers } from "../data/modifier";
+import { EModifierType, initModifiers, Modifiers } from "../data/modifier";
 import { EStorageCategory, IStorage } from "../data/storage";
 
 
@@ -50,9 +50,7 @@ export const reset = (): IClassControlReset => {
       },
     },
     modifier: {
-      [EModifierType.CATEGORIES]: {},
-      [EModifierType.FOCUSED]: {},
-      [EModifierType.GOODS]: {},
+      ...initModifiers(),
     },
     production: [],
     purchasedResearch: [],
