@@ -5,7 +5,6 @@ import { EStorageCategory, IStorage } from "../data/storage";
 export interface IClassControlReset {
   modifier: Modifiers;
   storage: Record<EStorageCategory, IStorage>;
-  production: [];
   purchasedResearch: [];
 };
 
@@ -52,7 +51,6 @@ export const reset = (): IClassControlReset => {
     modifier: {
       ...initModifiers(),
     },
-    production: [],
     purchasedResearch: [],
   };
 };

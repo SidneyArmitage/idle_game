@@ -1,6 +1,6 @@
 import { reset } from "../config/reset";
 import { EModifierEffect, EModifierType, Modifiers } from "./modifier";
-import { IProduction } from "./production";
+import { getConsumption, getOutput, getTime, IProduction } from "./production";
 import { IResearch } from "./research";
 import { EStorageCategory, getFree, IStorage } from "./storage";
 import { IGetItem, IItem } from "./types";
@@ -8,7 +8,7 @@ import { IGetItem, IItem } from "./types";
 export class SimulationControl {
   private items: Record<number, IItem>; // static
   private storage: Record<EStorageCategory, IStorage>; // resets
-  private production: IProduction[]; // resets
+  private production: Record<number, IProduction>; // changes (resets a bit)
   // modifier is stored by type, what item it affects which is defined by type and then what effect it has
   private modifier: Modifiers; // resets
   private research: Record<number, IResearch>; // static
@@ -16,7 +16,7 @@ export class SimulationControl {
   private unlockedResearch: number[]; // changes
   private unlockableResearch: number[]; // changes
 
-  constructor (items: Record<number, IItem>, {storage, production, modifier, purchasedResearch} = reset()){
+  constructor (items: Record<number, IItem>, production: Record<number, IProduction>, {storage, modifier, purchasedResearch} = reset()){
     this.items = items;
     this.research = {};
     this.unlockedResearch = [];
@@ -49,6 +49,19 @@ export class SimulationControl {
     return this.items[key];
   }
 
+  getProductions() {
+    return Object.values(this.production).map((producer) => ({
+      ...producer,
+      time: getTime(producer, this.modifier, this.items),
+      output: getOutput(producer, this.modifier, this.items),
+      consumption: getConsumption(producer, this.modifier, this.items),
+    }));
+  }
+
+  getProduction(key: number) {
+    return this.production[key];
+  }
+
   getStore(key: EStorageCategory) {
     return {
       ...this.storage[key],
@@ -57,9 +70,8 @@ export class SimulationControl {
   }
 
   reset() {
-    const {storage, production, modifier, purchasedResearch} = reset();
+    const {storage, modifier, purchasedResearch} = reset();
     this.storage = storage;
-    this.production = production;
     this.modifier = modifier;
     this.purchasedResearch = purchasedResearch;
   }

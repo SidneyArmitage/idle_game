@@ -36,7 +36,7 @@ export const getConsumption = (production: IProduction, modifiers: Modifiers, it
   });
 };
 
-export const getOutput = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>) => {
+export const getOutput = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>): [number, number][] => {
   const focusedModifier = modifiers[EModifierEffect.OUTPUT][EModifierType.FOCUSED][production.id]?.value ?? identityModifier;
   return production.output.map((element) => {
     const item = items[element[0]];

@@ -6,18 +6,20 @@ import { Production } from './components/pages/production';
 import { Research } from './components/pages/research';
 import { Detailed, Storage, Summary } from './components/pages/storage';
 import items from './config/items';
+import producers from './config/producers';
 import { SimulationControl } from './data/control';
 import { EStorageCategory } from './data/storage';
+import { arrayToMap } from './util/arrayToMap';
 
 export const App = () => {
-  const control = new SimulationControl(items.reduce((acc, cur) => ({...acc, [cur.id]: cur}), {}));
+  const control = new SimulationControl(arrayToMap(items), arrayToMap(producers));
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element ={<Layout/>}>
             <Route path="items" element={<Items control={control}/>}/>
-            <Route path="production" element={<Production/>}/>
+            <Route path="production" element={<Production control={control}/>}/>
             <Route path="research" element={<Research/>}/>
             <Route path="storage" element={<Storage/>}>
               <Route path="" element={<Summary control={control}/>}/>

@@ -11,24 +11,27 @@ export const Producer = ({name, description, progress, time, control, consumptio
   const [expanded, setExpanded] = useState(false);
   return (
     <div className={expanded ? "expanded" : ""}>
-      <h2>{name}</h2>
-      <p>{description}</p>
+      <button onClick={() => setExpanded(!expanded)}>
+        <h2>{name}</h2>
+        <p>{description}</p>
+      </button>
       <p>
         <span>{progress}</span> / <span>{time}</span>
       </p>
 
-      {expanded ? (<>
-        {consumption ? (
-          <>
+      {expanded ? (
+      <>
+        {consumption.length > 0 ? (
+          <div>
             Inputs:
             {consumption.map((cur) => <Item current={cur[1]} {...{...control.getItem(cur[0])}}/>)}
-          </>
+          </div>
         ) : ""}
-        {output ? (
-          <>
-            Inputs:
+        {output.length > 0 ? (
+          <div>
+            Outputs:
             {output.map((cur) => <Item current={cur[1]} {...{...control.getItem(cur[0])}}/>)}
-          </>
+          </div>
         ) : ""}
       </>) : ""}
     </div>
