@@ -1,0 +1,1 @@
+export const strip = (value: number): number => Number.parseFloat(value.toPrecision(4));

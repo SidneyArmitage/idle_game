@@ -1,3 +1,4 @@
+import { strip } from "../util/round";
 import { EModifierEffect, EModifierType, Modifiers } from "./modifier";
 import { EStorageCategory, IStorage, tryStore } from "./storage";
 import { IObject, IItem } from "./types";
@@ -67,10 +68,10 @@ export const getTime = (production: IProduction, modifiers: Modifiers, items: Re
     output = (modifiers[EModifierEffect.TIME][EModifierType.FOCUSED][production.id]?.value ?? identityModifier)(output);
     output = list.reduce((acc, cur) => acc + inverseSize * (cur[1] * (modifiers[EModifierEffect.TIME][EModifierType.GOODS][cur[0]]?.value ?? identityModifier)(output)), 0);
   }
-  return output;
+  return strip(output);
 };
 
-export const testStartProduction = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>, storage: Record<EStorageCategory, IStorage>): boolean => {
+export const tryStartProduction = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>, storage: Record<EStorageCategory, IStorage>): boolean => {
   const consumption = getConsumption(production, modifiers, items);
   if (consumption.every(([id, count]) => (storage[items[id]?.storageCategory]?.stored[id] ?? Number.MIN_SAFE_INTEGER) >= count)) {
     consumption.forEach(([id, count]) => {
@@ -82,6 +83,21 @@ export const testStartProduction = (production: IProduction, modifiers: Modifier
 };
 
 // Step based production method
-export const produce = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>, storage: Record<EStorageCategory, IStorage>, delta: number) => {
-
+export const produce = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>, storage: Record<EStorageCategory, IStorage>, delta: number): void => {
+  const time = getTime(production, modifiers, items);
+  const initialProgress = production.progress;
+  if(initialProgress === 0 && !tryStartProduction(production, modifiers, items, storage)) {
+    return;
+  }
+  production.progress = Math.min(initialProgress + delta, time);
+  if (initialProgress + delta >= time) {
+    production.progress -= time;
+    getOutput(production, modifiers, items).forEach(([key, value]) => {
+      tryStore(storage[items[key].storageCategory], key, value);
+    });
+    if (initialProgress + delta > time) {
+      return produce(production, modifiers, items, storage, delta - time + initialProgress);
+    }
+  }
+  
 };

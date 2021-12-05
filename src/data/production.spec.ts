@@ -1,5 +1,5 @@
 import { EModifierEffect, EModifierType, initModifiers } from "./modifier";
-import { getConsumption, getOutput, getTime, IProduction, testStartProduction } from "./production";
+import { getConsumption, getOutput, getTime, IProduction, produce, tryStartProduction } from "./production";
 import { EStorageCategory, IStorage } from "./storage";
 import { IItem, IObject } from "./types";
 
@@ -1448,25 +1448,21 @@ describe("try start production", () => {
       };
       const storage: unknown = {
         [EStorageCategory.BULK]: {
-          description: "",
-          icon: "",
+          ...fillObject(),
           id: EStorageCategory.BULK,
           available: 1000,
-          name: "",
           stored: {1: 10},
           reserved: {},
         },
         [EStorageCategory.MANUFACTURED]: {
-          description: "",
-          icon: "",
+          ...fillObject(),
           id: EStorageCategory.MANUFACTURED,
           available: 1000,
-          name: "",
           stored: {},
           reserved: {},
         },
       };
-      expect(testStartProduction(production, modifiers, items, storage as Record<EStorageCategory, IStorage>)).toBe(true);
+      expect(tryStartProduction(production, modifiers, items, storage as Record<EStorageCategory, IStorage>)).toBe(true);
       expect((storage as Record<EStorageCategory, IStorage>)[EStorageCategory.BULK].stored[1]).toBe(0);
     });
 
@@ -1495,25 +1491,21 @@ describe("try start production", () => {
       };
       const storage: unknown = {
         [EStorageCategory.BULK]: {
-          description: "",
-          icon: "",
+          ...fillObject(),
           id: EStorageCategory.BULK,
           available: 1000,
-          name: "",
           stored: {1: 11},
           reserved: {},
         },
         [EStorageCategory.MANUFACTURED]: {
-          description: "",
-          icon: "",
+          ...fillObject(),
           id: EStorageCategory.MANUFACTURED,
           available: 1000,
-          name: "",
           stored: {},
           reserved: {},
         },
       };
-      expect(testStartProduction(production, modifiers, items, storage as Record<EStorageCategory, IStorage>)).toBe(true);
+      expect(tryStartProduction(production, modifiers, items, storage as Record<EStorageCategory, IStorage>)).toBe(true);
       expect((storage as Record<EStorageCategory, IStorage>)[EStorageCategory.BULK].stored[1]).toBe(1);
     });
   });
@@ -1545,25 +1537,63 @@ describe("try start production", () => {
       };
       const storage: unknown = {
         [EStorageCategory.BULK]: {
-          description: "",
-          icon: "",
+          ...fillObject(),
           id: EStorageCategory.BULK,
           available: 1000,
-          name: "",
-          stored: {1: 10},
+          stored: {1: 1},
           reserved: {},
         },
         [EStorageCategory.MANUFACTURED]: {
-          description: "",
-          icon: "",
+          ...fillObject(),
           id: EStorageCategory.MANUFACTURED,
           available: 1000,
-          name: "",
           stored: {},
           reserved: {},
         },
       };
-      expect(testStartProduction(production, modifiers, items, storage as Record<EStorageCategory, IStorage>)).toBe(true);
+      expect(tryStartProduction(production, modifiers, items, storage as Record<EStorageCategory, IStorage>)).toBe(false);
+    });
+
+    it("does not have enough resources and resource does not exist in storage", () => {
+      const modifiers = initModifiers();
+      const production: IProduction = {
+        ...fillObject(),
+        id: 0,
+        amount: 1,
+        consumption: [[1, 10]],
+        output: [[2, 5]],
+        time: 1,
+        progress: 0,
+      };
+      const items: Record<number, IItem> = {
+        1: {
+        ...fillObject(),
+        id: 1,
+          storageCategory: EStorageCategory.BULK,
+        },
+        2: {
+        ...fillObject(),
+        id: 2,
+          storageCategory: EStorageCategory.MANUFACTURED,
+        },
+      };
+      const storage: unknown = {
+        [EStorageCategory.BULK]: {
+          ...fillObject(),
+          id: EStorageCategory.BULK,
+          available: 1000,
+          stored: {},
+          reserved: {},
+        },
+        [EStorageCategory.MANUFACTURED]: {
+          ...fillObject(),
+          id: EStorageCategory.MANUFACTURED,
+          available: 1000,
+          stored: {},
+          reserved: {},
+        },
+      };
+      expect(tryStartProduction(production, modifiers, items, storage as Record<EStorageCategory, IStorage>)).toBe(false);
     });
 
   });
@@ -1573,23 +1603,200 @@ describe("try start production", () => {
 describe("produce", () => {
 
   it("increases time on tick", () => {
-    produce();
+    const modifiers = initModifiers();
+    const production: IProduction = {
+      ...fillObject(),
+      id: 0,
+      amount: 1,
+      consumption: [],
+      output: [[1, 5]],
+      time: 1,
+      progress: 0.1,
+    };
+    const items: Record<number, IItem> = {
+      1: {
+      ...fillObject(),
+      id: 1,
+        storageCategory: EStorageCategory.BULK,
+      },
+    };
+    const storage: unknown = {
+      [EStorageCategory.BULK]: {
+        ...fillObject(),
+        id: EStorageCategory.BULK,
+        available: 1000,
+        stored: {},
+        reserved: {},
+      },
+    };
+    produce(production, modifiers, items, storage as Record<EStorageCategory, IStorage>, 0.1);
+    expect(production.progress).toBe(0.2);
   });
 
   it("increases time on start and subtracts resources", () => {
-    produce();
+    const modifiers = initModifiers();
+    const production: IProduction = {
+      ...fillObject(),
+      id: 0,
+      amount: 1,
+      consumption: [[2, 1]],
+      output: [[1, 5]],
+      time: 1,
+      progress: 0,
+    };
+    const items: Record<number, IItem> = {
+      1: {
+      ...fillObject(),
+      id: 1,
+        storageCategory: EStorageCategory.BULK,
+      },
+      2: {
+      ...fillObject(),
+      id: 2,
+        storageCategory: EStorageCategory.MANUFACTURED,
+      },
+    };
+    const storage: unknown = {
+      [EStorageCategory.BULK]: {
+        ...fillObject(),
+        id: EStorageCategory.BULK,
+        available: 1000,
+        stored: {},
+        reserved: {},
+      },
+      [EStorageCategory.MANUFACTURED]: {
+        ...fillObject(),
+        id: EStorageCategory.MANUFACTURED,
+        available: 1000,
+        stored: {2: 1},
+        reserved: {},
+      },
+    };
+    produce(production, modifiers, items, storage as Record<EStorageCategory, IStorage>, 0.1);
+    expect(production.progress).toBe(0.1);
+    expect((storage as Record<EStorageCategory, IStorage>)[EStorageCategory.MANUFACTURED].stored[2]).toBe(0);
   });
 
-  it("increases time on overflow and adds resources", () => {
-    produce();
+  it("increases time on finish and adds resources", () => {
+    const modifiers = initModifiers();
+    const production: IProduction = {
+      ...fillObject(),
+      id: 0,
+      amount: 1,
+      consumption: [],
+      output: [[1, 5]],
+      time: 1,
+      progress: 0.5,
+    };
+    const items: Record<number, IItem> = {
+      1: {
+      ...fillObject(),
+      id: 1,
+        storageCategory: EStorageCategory.BULK,
+      },
+    };
+    const storage: unknown = {
+      [EStorageCategory.BULK]: {
+        ...fillObject(),
+        id: EStorageCategory.BULK,
+        available: 1000,
+        stored: {},
+        reserved: {},
+      },
+    };
+    produce(production, modifiers, items, storage as Record<EStorageCategory, IStorage>, 0.5);
+    expect(production.progress).toBe(0);
+    expect((storage as Record<EStorageCategory, IStorage>)[EStorageCategory.BULK].stored[1]).toBe(5);
   });
 
-  it("increases time on overflow and caps", () => {
-    produce();
+  it("increases time on overflow and outputs as well as restarts", () => {
+    const modifiers = initModifiers();
+    const production: IProduction = {
+      ...fillObject(),
+      id: 0,
+      amount: 1,
+      consumption: [[2, 1]],
+      output: [[1, 5]],
+      time: 1,
+      progress: 0.5,
+    };
+    const items: Record<number, IItem> = {
+      1: {
+      ...fillObject(),
+      id: 1,
+        storageCategory: EStorageCategory.BULK,
+      },
+      2: {
+      ...fillObject(),
+      id: 2,
+        storageCategory: EStorageCategory.MANUFACTURED,
+      },
+    };
+    const storage: unknown = {
+      [EStorageCategory.BULK]: {
+        ...fillObject(),
+        id: EStorageCategory.BULK,
+        available: 1000,
+        stored: {},
+        reserved: {},
+      },
+      [EStorageCategory.MANUFACTURED]: {
+        ...fillObject(),
+        id: EStorageCategory.MANUFACTURED,
+        available: 1000,
+        stored: {2: 1},
+        reserved: {},
+      },
+    };
+    produce(production, modifiers, items, storage as Record<EStorageCategory, IStorage>, 1);
+    expect(production.progress).toBe(0.5);
+    expect((storage as Record<EStorageCategory, IStorage>)[EStorageCategory.BULK].stored[1]).toBe(5);
+    expect((storage as Record<EStorageCategory, IStorage>)[EStorageCategory.MANUFACTURED].stored[2]).toBe(0);
   });
 
-  it("increases time on overflow and takes resources as well as adding", () => {
-    produce();
+  it("stops on overflow if there arn`t enough resources", () => {
+    const modifiers = initModifiers();
+    const production: IProduction = {
+      ...fillObject(),
+      id: 0,
+      amount: 1,
+      consumption: [[2, 1]],
+      output: [[1, 5]],
+      time: 1,
+      progress: 0.5,
+    };
+    const items: Record<number, IItem> = {
+      1: {
+      ...fillObject(),
+      id: 1,
+        storageCategory: EStorageCategory.BULK,
+      },
+      2: {
+      ...fillObject(),
+      id: 2,
+        storageCategory: EStorageCategory.MANUFACTURED,
+      },
+    };
+    const storage: unknown = {
+      [EStorageCategory.BULK]: {
+        ...fillObject(),
+        id: EStorageCategory.BULK,
+        available: 1000,
+        stored: {},
+        reserved: {},
+      },
+      [EStorageCategory.MANUFACTURED]: {
+        ...fillObject(),
+        id: EStorageCategory.MANUFACTURED,
+        available: 1000,
+        stored: {2: 1},
+        reserved: {},
+      },
+    };
+    produce(production, modifiers, items, storage as Record<EStorageCategory, IStorage>, 4);
+    expect(production.progress).toBe(0);
+    expect((storage as Record<EStorageCategory, IStorage>)[EStorageCategory.BULK].stored[1]).toBe(10);
+    expect((storage as Record<EStorageCategory, IStorage>)[EStorageCategory.MANUFACTURED].stored[2]).toBe(0);
   });
 
 });
