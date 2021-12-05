@@ -62,6 +62,23 @@ describe("try reserve", () => {
       expect(tryReserve(store, 0, 101)).toBe(true);
       expect(store.reserved[0]).toBe(101);
     });
+    
+
+    it("can reserve the same amount as already specified and stored", ()=> {
+      const store: IStorage = {
+        id:EStorageCategory.BULK,
+        name: "",
+        available: 101,
+        description: "",
+        icon: "",
+        reserved: {},
+        stored: {},
+      };
+      expect(tryStore(store, 0, 100)).toBe(0);
+      expect(tryReserve(store, 0, 101)).toBe(true);
+      expect(tryReserve(store, 0, 101)).toBe(true);
+      expect(store.reserved[0]).toBe(101);
+    });
 
   });
 
@@ -193,6 +210,21 @@ describe("try store", () => {
       expect(store.stored[0]).toBe(100);
       expect(tryStore(store, 0, -100)).toBe(0);
       expect(store.stored[0]).toBe(0);
+    });
+
+    
+    it("modifies a reserved resource with nothing stored", () => {
+      const store: IStorage = {
+        id:EStorageCategory.BULK,
+        name: "",
+        available: 1000,
+        description: "",
+        icon: "",
+        stored: {},
+        reserved: {0: 100},
+      };
+      expect(tryStore(store, 0, 100)).toBe(0);
+      expect(store.stored[0]).toBe(100);
     });
 
   });

@@ -26,7 +26,7 @@ export const getFree = (store: IStorage) =>
 // returns false if the operation is illegal
 export const tryReserve = (store: IStorage, key: number, value: number): boolean => {
   const free = getFree(store);
-  if ((value < store.stored[key] ?? 0) || value < 0 || free < value - Math.max(store.reserved[key] ?? 0, store.stored[key] ?? 0)) {
+  if ((value < store.stored[key]) || value < 0 || free < value - Math.max(store.reserved[key] ?? 0, store.stored[key] ?? 0)) {
     return false;
   }
   store.reserved[key] = value;
@@ -37,7 +37,7 @@ export const tryReserve = (store: IStorage, key: number, value: number): boolean
 // fill Available shall only work on positive operations
 export const tryStore = (store: IStorage, key: number, delta: number, fillAvailable: boolean = false): number => {
   let overflow = 0;
-  let available = store.reserved[key] ?? 0 - store.stored[key] ?? 0;
+  let available = (store.reserved[key] ?? 0) - (store.stored[key] ?? 0);
   if (!store.reserved[key]) {
     available = getFree(store);
   }
