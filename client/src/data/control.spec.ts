@@ -6,7 +6,7 @@ describe("SimulationControl class", () => {
   describe("constructor", () => {
 
     it("runs on no inputs", () => {
-      new SimulationControl({});
+      new SimulationControl({}, {});
     });
 
   });
@@ -14,7 +14,7 @@ describe("SimulationControl class", () => {
   describe("reset", () => {
 
     it("runs successfully", () => {
-      const control = new SimulationControl({});
+      const control = new SimulationControl({}, {});
       control.reset();
     });
 
@@ -52,7 +52,7 @@ describe("SimulationControl class", () => {
           icon: "",
           storageCategory: EStorageCategory.POPULATION,
         },
-      });
+      }, {});
       expect(control.getItems(false, EStorageCategory.POPULATION)).toStrictEqual([{
         description: "They are the core of production",
         name: "Population",
@@ -92,7 +92,7 @@ describe("SimulationControl class", () => {
           icon: "",
           storageCategory: EStorageCategory.POPULATION,
         },
-      });
+      }, {});
       expect(control.getItems(false, EStorageCategory.POPULATION | EStorageCategory.BULK)).toStrictEqual([
         {
           description: "Straight from the tree",
@@ -154,7 +154,7 @@ describe("SimulationControl class", () => {
         icon: "",
         storageCategory: EStorageCategory.POPULATION,
       },
-    });
+    }, {});
     expect(control.getItems(true, EStorageCategory.POPULATION)).toStrictEqual([{
       description: "They are the core of production",
       name: "Population",

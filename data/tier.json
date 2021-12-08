@@ -1,0 +1,26 @@
+{
+  "stone": {
+    "value": 1,
+    "burn": [],
+    "tool": [],
+    "luxury": {
+    },
+    "overrides": {
+      "generation": {
+        "name": "Quarry"
+      }
+    }
+  },
+  "tin": {
+    "value": 2,
+    "burn": ["wood"],
+    "tool": ["stone"],
+    "luxury": {
+    },
+    "overrides": {
+      "generation": {
+        "name": "Tin Mine"
+      }
+    }
+  }
+}

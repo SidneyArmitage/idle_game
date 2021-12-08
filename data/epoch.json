@@ -1,0 +1,11 @@
+{
+  "primitive": {
+    "value": 1,
+    "wood": {
+      "name": "wood"
+    },
+    "burn": {
+      "name": "coal"
+    }
+  }
+}

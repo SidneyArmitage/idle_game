@@ -1,0 +1,22 @@
+{
+  "luxury": {
+    "time": 4,
+    "value": 1.5
+  },
+  "generation": {
+    "time": 1,
+    "value": 1
+  },
+  "refinement": {
+    "time": 2,
+    "value": 1.2
+  },
+  "tools": {
+    "time": 3,
+    "value": 1.4
+  },
+  "tradeGoods": {
+    "time": 3,
+    "value": 1.6
+  }
+}
