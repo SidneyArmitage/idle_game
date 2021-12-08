@@ -10038,6 +10038,12 @@
     "inherits" "^2.0.1"
     "safe-buffer" "^5.0.1"
 
+"shared@file:../shared":
+  "resolved" "file:../shared"
+  "version" "1.0.0"
+  dependencies:
+    "typescript" "^4.5.2"
+
 "shebang-command@^1.2.0":
   "integrity" "sha1-RKrGW2lbAzmJaMOfNj/uXer98eo="
   "resolved" "https://registry.npmjs.org/shebang-command/-/shebang-command-1.2.0.tgz"

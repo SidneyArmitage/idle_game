@@ -1,4 +1,5 @@
-import { EStorageCategory, IStorage, tryReserve, tryStore } from "./storage";
+import { IStorage, tryReserve, tryStore } from "./storage";
+import { EStorageCategory } from "shared";
 
 describe("try reserve", () => {
 

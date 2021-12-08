@@ -1,7 +1,7 @@
 import { EModifierEffect, EModifierType, initModifiers } from "./modifier";
 import { getConsumption, getOutput, getTime, IProduction, produce, tryStartProduction } from "./production";
-import { EStorageCategory, IStorage } from "./storage";
-import { IItem, IObject } from "./types";
+import { IItem, IObject, EStorageCategory } from "shared";
+import { IStorage } from "./storage";
 
 const fillObject = (): IObject => ({
   id: 0,

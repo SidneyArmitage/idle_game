@@ -1,28 +1,7 @@
 import { strip } from "../util/round";
 import { EModifierEffect, EModifierType, Modifiers } from "./modifier";
 import { EStorageCategory, IStorage, tryStore } from "./storage";
-import { IObject, IItem } from "./types";
 
-enum EProductionCategory {
-  EXTRACT = 1,
-  GROW = 2,
-  AVAILABLE = 4,
-};
-
-// we need both vertical and horizontal expansion
-// cannot output any inputs
-export interface IProduction extends IObject {
-  // the number of production buildings of this type
-  amount: number;
-  // consumption - must be a subset of required
-  consumption: [number, number][];
-  // output
-  output: [number, number][];
-  // time
-  time: number;
-  progress: number;
-  name: string;
-};
 
 const identityModifier = (base: number) => base;
 

@@ -1,12 +1,4 @@
-import { IObject } from "./types";
-
-export enum EStorageCategory {
-  BULK = 1,
-  MANUFACTURED = 2,
-  EXOTIC = 4,
-  POPULATION = 8,
-};
-
+import { IObject } from "shared";
 export interface IStorage extends IObject {
   // available space
   available: number;
