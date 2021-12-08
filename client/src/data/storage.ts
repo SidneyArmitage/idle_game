@@ -1,4 +1,4 @@
-import { IObject } from "shared";
+import { EStorageCategory, IObject } from "shared";
 export interface IStorage extends IObject {
   // available space
   available: number;

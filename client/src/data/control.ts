@@ -1,9 +1,9 @@
+import { IItem, EStorageCategory, IProduction, IGetItem } from "shared";
 import { reset } from "../config/reset";
 import { Modifiers } from "./modifier";
-import { getConsumption, getOutput, getTime, IProduction } from "./production";
+import { getConsumption, getOutput, getTime } from "./production";
 import { IResearch } from "./research";
-import { EStorageCategory, getFree, IStorage } from "./storage";
-import { IGetItem, IItem } from "./types";
+import { getFree, IStorage } from "./storage";
 
 export class SimulationControl {
   private items: Record<number, IItem>; // static
