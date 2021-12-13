@@ -5,11 +5,13 @@
   },
   "generation": {
     "time": 1,
-    "value": 1
+    "value": 1,
+    "output": "{{resource}} ore"
   },
   "refinement": {
     "time": 2,
-    "value": 1.2
+    "value": 1.2,
+    "output": "{{resource}} ingot"
   },
   "tools": {
     "time": 3,

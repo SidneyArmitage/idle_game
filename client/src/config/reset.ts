@@ -1,5 +1,6 @@
 import { EModifierType, initModifiers, Modifiers } from "../data/modifier";
-import { EStorageCategory, IStorage } from "../data/storage";
+import { EStorageCategory } from "shared";
+import { IStorage } from "../data/storage";
 
 
 export interface IClassControlReset {

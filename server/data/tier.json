@@ -5,6 +5,7 @@
     "tool": [],
     "luxury": {
     },
+    "resource": "Stone",
     "overrides": {
       "generation": {
         "name": "Quarry"
@@ -15,6 +16,7 @@
     "value": 2,
     "burn": ["wood"],
     "tool": ["stone"],
+    "resource": "Tin",
     "luxury": {
     },
     "overrides": {
