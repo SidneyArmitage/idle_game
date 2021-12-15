@@ -1,0 +1,10 @@
+{
+  "wood": {
+    "time": 1,
+    "value": 1
+  },
+  "burn": {
+    "time": 2,
+    "value": 2
+  }
+}

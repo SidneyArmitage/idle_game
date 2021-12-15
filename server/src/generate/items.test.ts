@@ -1,5 +1,5 @@
 import { EStorageCategory, IItem } from "shared";
-import { createItem, createTierItems } from "./items";
+import { createEpochItems, createItem, createTierItems, default as generatesItems } from "./items";
 
 describe("Create Item", () => {
 
@@ -22,7 +22,7 @@ describe("Create Item", () => {
       name: "Stone",
       storageCategory: EStorageCategory.BULK,
     };
-    expect(createItem("Stone", 0, "{{name}} Ore the precursor to its more processed and useful form", EStorageCategory.BULK, "")).toStrictEqual(expected)
+    expect(createItem("Stone", 0, "{{this}} Ore the precursor to its more processed and useful form", EStorageCategory.BULK, "")).toStrictEqual(expected)
   });
 
 });
@@ -33,16 +33,66 @@ describe("create Tier Items", () => {
     const expected: IItem[] = [
       {
         id: 0,
-        description: "Stone Ore the precursor to its more processed and useful form",
+        description: "Tin ore the precursor to its more processed and useful form",
         icon: "",
-        name: "Stone",
+        name: "Tin ore",
         storageCategory: EStorageCategory.BULK,
       },
       {
         id: 1,
-        description: "Stone blocks are ready to be processed into more advanced goods",
+        description: "A Tin ingot is ready to be processed into more advanced goods",
         icon: "",
-        name: "Stone Block",
+        name: "Tin ingot",
+        storageCategory: EStorageCategory.MANUFACTURED,
+      },
+    ];
+    expect(createTierItems({
+      value: 1,
+      burn: ["wood"],
+      tool: ["wood"],
+      luxury: {},
+      overrides: {
+        generation: {
+          itemName: "Tin ore",
+        },
+        refinement: {
+          itemName: "Tin ingot",
+          itemDescription: "A {{this}} is ready to be processed into more advanced goods",
+          storageCategory: 2,
+        }
+      },
+      resource: "Tin",
+    }, {
+      generation: {
+        storageCategory: 1,
+        time: 0,
+        value: 0,
+        itemDescription: "{{this}} the precursor to its more processed and useful form",
+        input: [],
+        output: [],
+        producer: "",
+        producerDescription: "",
+      }, 
+      refinement: {
+        storageCategory: 1,
+        time: 0,
+        value: 0,
+        itemDescription: "should not show",
+        input: [],
+        output: [],
+        producer: "",
+        producerDescription: "",
+      },
+    }, 0)).toStrictEqual([2, expected]);
+  });
+
+  it("creates all of the base items for the tier with a default", () => {
+    const expected: IItem[] = [
+      {
+        id: 0,
+        description: "Tin the precursor to its more processed and useful form",
+        icon: "",
+        name: "Tin",
         storageCategory: EStorageCategory.BULK,
       },
     ];
@@ -51,13 +101,184 @@ describe("create Tier Items", () => {
       burn: ["wood"],
       tool: ["wood"],
       luxury: {},
-      overrides: {},
-      resource: "stone",
+      overrides: {
+      },
+      resource: "Tin",
     }, {
+      generation: {
+        storageCategory: 1,
+        time: 0,
+        value: 0,
+        itemDescription: "{{this}} the precursor to its more processed and useful form",
+        input: [],
+        output: [],
+        producer: "",
+        producerDescription: "",
+      }, 
+    }, 0)).toStrictEqual([1, expected]);
+  });
+
+});
+
+describe("create Epoch Items", () => {
+
+  it("creates wood and burn", () => {
+    const output = [
+      {
+        id: 0,
+        description: "wood is used as an inefficient fuel or part of more complex constructions.",
+        icon: "",
+        name: "wood",
+        storageCategory: EStorageCategory.BULK,
+      },
+      {
+        id: 1,
+        description: "coal is used as an efficient fuel.",
+        icon: "",
+        name: "coal",
+        storageCategory: EStorageCategory.BULK,
+      },
+    ];
+    expect(createEpochItems({
       value: 1,
-      wood: {},
-      burn: {},
-    }, ["generation", "refinement"])).toStrictEqual(expected);
+      overrides: {
+        burn: {
+          itemName: "coal",
+        }
+      },
+    },
+    {
+      wood: {
+        time: 1,
+        value: 1,
+        storageCategory: 1,
+        itemDescription: "{{this}} is used as an inefficient fuel or part of more complex constructions.",
+        input: [],
+        output: [],
+        producer: "",
+        producerDescription: "",
+      },
+      burn: {
+        time: 2,
+        value: 2,
+        storageCategory: 1,
+        itemDescription: "{{this}} is used as an efficient fuel.",
+        input: [],
+        output: [],
+        producer: "",
+        producerDescription: "",
+      }
+    }, 0)).toStrictEqual([2, output]);
+  });
+
+});
+
+describe("generate items (default)", () => {
+  
+  it("works", () => {
+    const expected = [
+      {
+        id: 0,
+        description: "wood is used as an inefficient fuel or part of more complex constructions.",
+        icon: "",
+        name: "wood",
+        storageCategory: EStorageCategory.BULK,
+      },
+      {
+        id: 1,
+        description: "coal is used as an efficient fuel.",
+        icon: "",
+        name: "coal",
+        storageCategory: EStorageCategory.BULK,
+      },
+      {
+        id: 2,
+        description: "Tin ore the precursor to its more processed and useful form",
+        icon: "",
+        name: "Tin ore",
+        storageCategory: EStorageCategory.BULK,
+      },
+      {
+        id: 3,
+        description: "A Tin ingot is ready to be processed into more advanced goods",
+        icon: "",
+        name: "Tin ingot",
+        storageCategory: EStorageCategory.MANUFACTURED,
+      },
+    ];
+    expect(generatesItems({
+      tin: {
+        value: 1,
+        burn: ["wood"],
+        tool: ["wood"],
+        luxury: {},
+        overrides: {
+          generation: {
+            itemName: "Tin ore",
+          },
+          refinement: {
+            itemName: "Tin ingot",
+            itemDescription: "A {{this}} is ready to be processed into more advanced goods",
+            storageCategory: 2,
+          }
+        },
+        resource: "Tin",
+      },
+    },
+    {
+      generation: {
+        storageCategory: 1,
+        time: 0,
+        value: 0,
+        itemDescription: "{{this}} the precursor to its more processed and useful form",
+        input: [],
+        output: [],
+        producer: "",
+        producerDescription: "",
+      }, 
+      refinement: {
+        storageCategory: 1,
+        time: 0,
+        value: 0,
+        itemDescription: "should not show",
+        input: [],
+        output: [],
+        producer: "",
+        producerDescription: "",
+      },
+    },
+    { 
+      ancient: {
+        value: 1,
+        overrides: {
+          burn: {
+            itemName: "coal",
+          }
+        },
+      },
+    },
+    {
+      wood: {
+        time: 1,
+        value: 1,
+        storageCategory: 1,
+        itemDescription: "{{this}} is used as an inefficient fuel or part of more complex constructions.",
+        input: [],
+        output: [],
+        producer: "",
+        producerDescription: "",
+      },
+      burn: {
+        time: 2,
+        value: 2,
+        storageCategory: 1,
+        itemDescription: "{{this}} is used as an efficient fuel.",
+        input: [],
+        output: [],
+        producer: "",
+        producerDescription: "",
+      }
+    })).toStrictEqual(expected);
   });
 
 });
