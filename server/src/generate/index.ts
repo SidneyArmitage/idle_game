@@ -41,3 +41,5 @@ export default (tier: Record<string, ITier>, tierItems: Record<string, IEntityBa
     items: generateItems(tier, tierItems, epoch, epochItems),
   }
 }
+
+export const items = generateItems;

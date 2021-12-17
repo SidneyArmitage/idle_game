@@ -1,15 +1,11 @@
-import { ApolloServerPluginDrainHttpServer, gql } from "apollo-server-core";
+import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { ApolloServer } from "apollo-server-express"
 import { Server } from "http";
 import { Express } from "express";
+import { typeDefs } from "shared";
+
 
 export default async (app: Express, httpServer: Server) => {
-  const typeDefs: any = gql`
-  #schema
-  type Query {
-    id: Int
-  }
-  `;
   const resolvers = {};
   const server = new ApolloServer({
     typeDefs,
