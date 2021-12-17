@@ -1,4 +1,4 @@
-import { EModifierType, initModifiers, Modifiers } from "../data/modifier";
+import { initModifiers, Modifiers } from "../data/modifier";
 import { EStorageCategory } from "shared";
 import { IStorage } from "../data/storage";
 

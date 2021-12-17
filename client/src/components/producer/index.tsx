@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SimulationControl } from "../../data/control";
-import { IProduction } from "../../data/production";
+import { IProduction } from "shared";
 import { Item } from "../item";
 
 interface IItemProps extends IProduction {

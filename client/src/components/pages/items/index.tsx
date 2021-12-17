@@ -1,5 +1,5 @@
 import { SimulationControl } from "../../../data/control";
-import { EStorageCategory } from "../../../data/storage";
+import { EStorageCategory } from "shared";
 import { Item } from "../../item";
 
 interface IItemsProps {

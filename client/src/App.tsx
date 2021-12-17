@@ -1,4 +1,5 @@
 import { Routes, BrowserRouter, Route } from 'react-router-dom';
+import { EStorageCategory } from 'shared';
 import './App.scss';
 import { Layout } from './components/layout';
 import { Items } from './components/pages/items';
@@ -8,7 +9,6 @@ import { Detailed, Storage, Summary } from './components/pages/storage';
 import items from './config/items';
 import producers from './config/producers';
 import { SimulationControl } from './data/control';
-import { EStorageCategory } from './data/storage';
 import { arrayToMap } from './util/arrayToMap';
 
 export const App = () => {

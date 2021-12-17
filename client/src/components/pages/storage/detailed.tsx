@@ -1,5 +1,6 @@
+import { EStorageCategory } from "shared";
 import { SimulationControl } from "../../../data/control";
-import { EStorageCategory, getFree } from "../../../data/storage";
+import { getFree } from "../../../data/storage";
 import { Item } from "../../item";
 
 interface IDetailedProps {

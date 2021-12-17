@@ -1,4 +1,4 @@
-import { IObject } from "./types";
+import { IObject } from "shared";
 
 // this defines the heirachy that these operate in, Cat < Focused < GOODS
 export enum EModifierType {

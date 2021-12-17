@@ -1,10 +1,11 @@
-import { EStorageCategory } from "shared";
+import { EStorageCategory, IItem } from "shared";
+import { default as generateItems } from "./items";
 
-export interface IItemBase {
+export interface IEntityBase {
   time: number;
   value: number;
-  output: string[];
-  input: string[];
+  output: [string, number][];
+  input: [string, number][];
   storageCategory: EStorageCategory;
   itemDescription: string;
   producer: string;
@@ -14,8 +15,8 @@ export interface IItemBase {
 export interface IOverride {
   itemName?: string;
   itemDescription?: string;
-  output?: string[];
-  input?: string[];
+  output?: [string, number][];
+  input?: [string, number][];
   storageCategory?: EStorageCategory;
   producerName?: string;
   producerDescription?: string;
@@ -33,4 +34,10 @@ export interface ITier {
   luxury: IOverride;
   overrides: Record<string, IOverride>;
   resource: string;
+}
+
+export default (tier: Record<string, ITier>, tierItems: Record<string, IEntityBase>, epoch: Record<string, IEpoch>, epochItems: Record<string, IEntityBase>): {items: IItem[]} => {
+  return {
+    items: generateItems(tier, tierItems, epoch, epochItems),
+  }
 }

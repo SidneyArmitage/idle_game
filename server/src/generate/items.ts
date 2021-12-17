@@ -1,5 +1,5 @@
 import { EStorageCategory, IItem } from "shared";
-import { ITier, IItemBase, IEpoch } from ".";
+import { ITier, IEntityBase, IEpoch } from ".";
 
 export const createItem = (name: string, id: number, description: string, storageCategory: EStorageCategory, icon: ""): IItem => ({
   name,
@@ -9,7 +9,7 @@ export const createItem = (name: string, id: number, description: string, storag
   icon,
 });
 
-export const createTierItems = (tier: ITier, baseItems: Record<string, IItemBase>, nextId: number): [number, IItem[]] => {
+export const createTierItems = (tier: ITier, baseItems: Record<string, IEntityBase>, nextId: number): [number, IItem[]] => {
   const out = Object.keys(baseItems).map((key) => createItem(
     tier.overrides[key]?.itemName ?? `${tier.resource}`, 
     nextId++,
@@ -19,7 +19,7 @@ export const createTierItems = (tier: ITier, baseItems: Record<string, IItemBase
   return [nextId, out];
 };
 
-export const createEpochItems = (epoch: IEpoch, baseItems: Record<string, IItemBase>, nextId: number ): [number, IItem[]] => {
+export const createEpochItems = (epoch: IEpoch, baseItems: Record<string, IEntityBase>, nextId: number ): [number, IItem[]] => {
   const out = Object.keys(baseItems).map((key) => {
     return createItem(
       epoch.overrides[key]?.itemName ?? key, 
@@ -31,7 +31,7 @@ export const createEpochItems = (epoch: IEpoch, baseItems: Record<string, IItemB
   return [nextId, out];
 };
 
-export default (tier: Record<string, ITier>, tierItems: Record<string, IItemBase>, epoch: Record<string, IEpoch>, epochItems: Record<string, IItemBase>): IItem[] => {
+export default (tier: Record<string, ITier>, tierItems: Record<string, IEntityBase>, epoch: Record<string, IEpoch>, epochItems: Record<string, IEntityBase>): IItem[] => {
   let id = 0;
   return [
     ...Object.values(epoch).reduce((acc, e) => {

@@ -4,7 +4,7 @@
 // * buy more land
 // * upgrade starting state
 
-import { IObject } from "./types";
+import { IObject } from "shared";
 
 enum EResearchType {
   PRODUCTION,

@@ -1,5 +1,4 @@
-import { EStorageCategory } from "../data/storage";
-import { IItem } from "../data/types";
+import { EStorageCategory, IItem } from "shared";
 
 export default [
   {

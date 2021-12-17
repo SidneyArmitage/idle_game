@@ -1,4 +1,4 @@
-import { IProduction } from "../data/production";
+import { IProduction } from "shared";
 
 export default [
   {
