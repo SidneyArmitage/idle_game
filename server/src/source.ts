@@ -1,13 +1,14 @@
 import { PathLike } from "fs";
 import { stat } from "fs/promises";
 
-export const source = async (st: (path: PathLike) => any, paths: PathLike[], fn: () => Promise<void>) => {
+// caches the data provided by a function based upon paths
+export const source = async <T>(st: (path: PathLike) => any, paths: PathLike[], fn: () => Promise<T>) => {
   let mtime: Record<string, number> = {};
   for (const path of paths) {
     mtime[path.toString()] = (await st(path)).mtimeMs;
   }
   let cache = await fn();
-  return async () => {
+  return async (): Promise<T> => {
     let isSame = true;
     for (const path of paths) {
       const { mtimeMs } = await st(path);
@@ -19,8 +20,9 @@ export const source = async (st: (path: PathLike) => any, paths: PathLike[], fn:
     if (isSame === false) {
       cache = await fn();
     }
+    console.log(cache);
     return cache;
   };
 };
 
-export default (path: PathLike[], fn: () => Promise<void>) => source(stat, path, fn);
+export default <T>(path: PathLike[], fn: () => Promise<T>) => source<T>(stat, path, fn);

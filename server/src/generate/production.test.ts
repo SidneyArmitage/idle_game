@@ -196,6 +196,81 @@ describe("create tier producers", () => {
       0
     )).toStrictEqual([1, expected]);
   });
+  
+  it("Creates an empty producer", () => {
+    const expected: IProduction[] = [
+      {
+        id: 0,
+        description: "Hard workers at a Tin mine produces Tin ore",
+        icon: "",
+        name: "Tin mine",
+        amount: 0,
+        consumption: [[1, 1]],
+        output: [[0, 2]],
+        time: 0,
+        progress: 0,
+      },
+      {
+        id: 1,
+        description: "Hard workers at a Tin smith produces Tin ingot",
+        icon: "",
+        name: "Tin smith",
+        amount: 0,
+        consumption: [[0, 1]],
+        output: [[2, 2]],
+        time: 0,
+        progress: 0,
+      }
+    ];
+    expect(createTierProducers({
+      value: 1,
+      burn: ["wood"],
+      tool: ["wood"],
+      luxury: {},
+      overrides: {
+        generation: {
+          producerName: "Tin mine",
+          input: [["wood", 1]],
+          itemName: "Tin ore"
+        },
+        refinement: {
+          producerName: "Tin smith",
+          itemName: "Tin ingot"
+        },
+      },
+      resource: "Tin",
+    }, {
+      generation: {
+        storageCategory: 1,
+        time: 0,
+        value: 0,
+        producerDescription: "Hard workers at a {{this}} produces {{item}}",
+        input: [],
+        output: [["{{item}}", 2]],
+        producer: "",
+        itemDescription: "",
+      },
+      refinement: {
+        storageCategory: 1,
+        time: 0,
+        value: 0,
+        producerDescription: "Hard workers at a {{this}} produces {{item}}",
+        input: [["generation", 1]],
+        output: [["{{item}}", 2]],
+        producer: "",
+        itemDescription: "",
+      },
+    },
+      {
+        "Tin ore": 0,
+        // needs to come from the same tier or epoch
+        "generation": 0,
+        "wood": 1,
+        "Tin ingot": 2,
+      },
+      0
+    )).toStrictEqual([2, expected]);
+  });
 
 });
 

@@ -1,24 +1,42 @@
 {
   "luxury": {
     "time": 4,
-    "value": 1.5
+    "value": 1.5,
+    "output": ["{{item}}", 1],
+    "storageCategory": 4,
+    "producerDescription": "A hard working {{this}} produces {{item}} to improve quality of life.",
+    "itemDescription": "{{this}} is used to improve the standards of life for workers."
   },
   "generation": {
     "time": 1,
     "value": 1,
-    "output": "{{resource}} ore"
+    "output": ["{{item}}", 1],
+    "storageCategory": 1,
+    "producerDescription": "A hard working {{this}} produces {{item}} to be further refined and power the economy.",
+    "itemDescription": "{{this}} is the base material for production."
   },
   "refinement": {
     "time": 2,
     "value": 1.2,
-    "output": "{{resource}} ingot"
+    "output": ["{{item}}", 1],
+    "storageCategory": 2,
+    "producerDescription": "A hard working {{this}} produces {{item}} to build more complex goods and items.",
+    "itemDescription": "{{this}} is the primary material used to make goods."
   },
   "tools": {
     "time": 3,
-    "value": 1.4
+    "value": 1.4,
+    "output": ["{{item}}", 1],
+    "storageCategory": 2,
+    "producerDescription": "A hard working {{this}} produces {{item}} to manufacture more complex goods.",
+    "itemDescription": "{{this}} increases the production rates and allows for the gathering & generation of more complex materials."
   },
   "tradeGoods": {
     "time": 3,
-    "value": 1.6
+    "value": 1.6,
+    "output": ["{{item}}", 2],
+    "storageCategory": 1,
+    "producerDescription": "A hard working {{this}} produces {{item}} for sale to other markets.",
+    "itemDescription": "{{this}} is sold to other more advanced settlements for a profit."
   }
 }

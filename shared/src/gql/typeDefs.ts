@@ -37,7 +37,7 @@ export const typeDefs = gql`
   }
 
   type Resources {
-    item: [Item]
+    items: [Item]
     production: [Production]
   }
 

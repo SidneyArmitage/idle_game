@@ -1,4 +1,4 @@
-import { EStorageCategory, IItem } from "shared";
+import { EStorageCategory, IItem, IProduction } from "shared";
 import { default as generateItems } from "./items";
 
 export interface IEntityBase {
@@ -36,7 +36,12 @@ export interface ITier {
   resource: string;
 }
 
-export default (tier: Record<string, ITier>, tierItems: Record<string, IEntityBase>, epoch: Record<string, IEpoch>, epochItems: Record<string, IEntityBase>): {items: IItem[]} => {
+export interface IResources {
+  items: IItem[];
+  // production: IProduction[];
+}
+
+export default (tier: Record<string, ITier>, tierItems: Record<string, IEntityBase>, epoch: Record<string, IEpoch>, epochItems: Record<string, IEntityBase>): IResources => {
   return {
     items: generateItems(tier, tierItems, epoch, epochItems),
   }
