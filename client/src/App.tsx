@@ -10,9 +10,30 @@ import items from './config/items';
 import producers from './config/producers';
 import { SimulationControl } from './data/control';
 import { arrayToMap } from './util/arrayToMap';
+import {
+  useQuery,
+  gql
+} from "@apollo/client";
+
+const query = gql`
+  query resources {
+    resources {
+      items {
+        storageCategory
+        description
+        name
+        id
+        icon
+      }
+    }
+  }
+`;
 
 export const App = () => {
   const control = new SimulationControl(arrayToMap(items), arrayToMap(producers));
+  const { loading, data } = useQuery(query);
+  console.log(loading);
+  console.log(data);
   return (
     <>
       <BrowserRouter>

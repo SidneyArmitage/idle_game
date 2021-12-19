@@ -5,6 +5,7 @@
       "wood": {
       },
       "burn": {
+        "itemName":"coal"
       }
     }
   }

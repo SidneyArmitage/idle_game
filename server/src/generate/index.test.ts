@@ -63,7 +63,9 @@ describe("generate", () => {
           itemDescription: "{{this}} the precursor to its more processed and useful form",
           input: [],
           output: [],
-          producer: "",
+
+          producerName: "",
+          itemName: "",
           producerDescription: "",
         },
         refinement: {
@@ -73,7 +75,9 @@ describe("generate", () => {
           itemDescription: "should not show",
           input: [],
           output: [],
-          producer: "",
+
+          producerName: "",
+          itemName: "",
           producerDescription: "",
         },
       },
@@ -95,7 +99,9 @@ describe("generate", () => {
           itemDescription: "{{this}} is used as an inefficient fuel or part of more complex constructions.",
           input: [],
           output: [],
-          producer: "",
+
+          producerName: "",
+          itemName: "wood",
           producerDescription: "",
         },
         burn: {
@@ -105,7 +111,9 @@ describe("generate", () => {
           itemDescription: "{{this}} is used as an efficient fuel.",
           input: [],
           output: [],
-          producer: "",
+
+          producerName: "",
+          itemName: "",
           producerDescription: "",
         }
       })).toStrictEqual(expected);

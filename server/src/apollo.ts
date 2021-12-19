@@ -2,7 +2,7 @@ import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { ApolloServer } from "apollo-server-express"
 import { Server } from "http";
 import { Express } from "express";
-import { typeDefs } from "shared";
+import typeDefs from "./typeDefs";
 
 import { readFile } from "fs/promises";
 import generate, { IResources } from "./generate";

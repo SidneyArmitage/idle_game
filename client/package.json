@@ -45,5 +45,8 @@
   "devDependencies": {
     "@types/jest": "^27.0.3",
     "msw": "^0.36.3"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

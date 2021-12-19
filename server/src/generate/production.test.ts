@@ -100,8 +100,9 @@ describe("create tier producers", () => {
         producerDescription: "Hard workers at a {{this}} produces {{item}}",
         input: [],
         output: [],
-        producer: "",
         itemDescription: "",
+        producerName: "",
+        itemName: "",
       },
     }, {}, 0
     )).toStrictEqual([1, expected]);
@@ -140,7 +141,9 @@ describe("create tier producers", () => {
         producerDescription: "Hard workers at a {{this}} produces {{item}}",
         input: [],
         output: [["{{item}}", 2]],
-        producer: "",
+        
+        producerName: "",
+        itemName: "",
         itemDescription: "",
       },
     },
@@ -185,7 +188,9 @@ describe("create tier producers", () => {
         producerDescription: "Hard workers at a {{this}} produces {{item}}",
         input: [],
         output: [["{{item}}", 2]],
-        producer: "",
+        
+        producerName: "",
+        itemName: "",
         itemDescription: "",
       },
     },
@@ -247,7 +252,9 @@ describe("create tier producers", () => {
         producerDescription: "Hard workers at a {{this}} produces {{item}}",
         input: [],
         output: [["{{item}}", 2]],
-        producer: "",
+        
+        producerName: "",
+        itemName: "",
         itemDescription: "",
       },
       refinement: {
@@ -257,7 +264,9 @@ describe("create tier producers", () => {
         producerDescription: "Hard workers at a {{this}} produces {{item}}",
         input: [["generation", 1]],
         output: [["{{item}}", 2]],
-        producer: "",
+        
+        producerName: "",
+        itemName: "",
         itemDescription: "",
       },
     },
@@ -321,7 +330,9 @@ describe("create epoch producers", () => {
           itemDescription: "{{this}} is used as an inefficient fuel or part of more complex constructions.",
           input: [],
           output: [],
-          producer: "",
+          
+        producerName: "",
+        itemName: "",
           producerDescription: "Provides {{item}} to facilitate progress.",
         },
         burn: {
@@ -331,7 +342,9 @@ describe("create epoch producers", () => {
           itemDescription: "{{this}} is used as an efficient fuel.",
           input: [],
           output: [],
-          producer: "",
+          
+        producerName: "",
+        itemName: "",
           producerDescription: "",
         }
       }, {
@@ -402,7 +415,9 @@ describe("generate producers (default)", () => {
           producerDescription: "Hard workers at a {{this}} produces {{item}}",
           input: [],
           output: [["{{item}}", 2]],
-          producer: "",
+          
+        producerName: "",
+        itemName: "",
           itemDescription: "",
         },
       },
@@ -429,7 +444,9 @@ describe("generate producers (default)", () => {
           itemDescription: "{{this}} is used as an inefficient fuel or part of more complex constructions.",
           input: [],
           output: [],
-          producer: "",
+          
+        producerName: "",
+        itemName: "",
           producerDescription: "Provides {{item}} to facilitate progress.",
         },
         burn: {
@@ -439,7 +456,9 @@ describe("generate producers (default)", () => {
           itemDescription: "{{this}} is used as an efficient fuel.",
           input: [],
           output: [],
-          producer: "",
+          
+        producerName: "",
+        itemName: "",
           producerDescription: "",
         }
       },

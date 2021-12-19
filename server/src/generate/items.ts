@@ -11,7 +11,7 @@ export const createItem = (name: string, id: number, description: string, storag
 
 export const createTierItems = (tier: ITier, baseItems: Record<string, IEntityBase>, nextId: number): [number, IItem[]] => {
   const out = Object.keys(baseItems).map((key) => createItem(
-    (tier.overrides[key]?.itemName ?? `${tier.resource}`).replace(/\{\{resource\}\}/g, tier.resource), 
+    (tier.overrides[key]?.itemName ?? baseItems[key].itemName).replace(/\{\{resource\}\}/g, tier.resource), 
     nextId++,
     tier.overrides[key]?.itemDescription ?? baseItems[key].itemDescription,
     tier.overrides[key]?.storageCategory ?? baseItems[key].storageCategory, 
@@ -22,7 +22,7 @@ export const createTierItems = (tier: ITier, baseItems: Record<string, IEntityBa
 export const createEpochItems = (epoch: IEpoch, baseItems: Record<string, IEntityBase>, nextId: number ): [number, IItem[]] => {
   const out = Object.keys(baseItems).map((key) => {
     return createItem(
-      epoch.overrides[key]?.itemName ?? key, 
+      epoch.overrides[key]?.itemName ?? baseItems[key].itemName, 
       nextId++,
       epoch.overrides[key]?.itemDescription ?? baseItems[key].itemDescription,
       epoch.overrides[key]?.storageCategory ?? baseItems[key].storageCategory, 

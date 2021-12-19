@@ -8,7 +8,16 @@
     "resource": "Stone",
     "overrides": {
       "generation": {
-        "name": "Quarry"
+        "itemName": "Stone",
+        "producerName": "Quarry"
+      },
+      "refinement": {
+        "itemName": "Stone Blocks",
+        "producerName": "Stone mason"
+      },
+      "luxury": {
+        "itemName": "Idles",
+        "producerName": "Sculptor"
       }
     }
   },
@@ -21,7 +30,7 @@
     },
     "overrides": {
       "generation": {
-        "name": "Tin Mine"
+        "itemName": "Tin Mine"
       }
     }
   }

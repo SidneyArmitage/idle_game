@@ -15,7 +15,7 @@ export const createProducer = (name: string, id: number, description: string, ic
 
 export const createTierProducers = (tier: ITier, baseEntities: Record<string, IEntityBase>, itemMap: Record<string, number>, nextId: number): [number, IProduction[]] => {
   const out = Object.keys(baseEntities).map((key) => createProducer(
-    tier.overrides[key]?.producerName ?? `${tier.resource} ${key}`, 
+    (tier.overrides[key]?.producerName ?? baseEntities[key].producerName).replace(/\{\{\resource}\}/, tier.resource), 
     nextId++,
     tier.overrides[key]?.producerDescription ?? baseEntities[key].producerDescription, 
     "",
@@ -30,7 +30,7 @@ export const createTierProducers = (tier: ITier, baseEntities: Record<string, IE
 
 export const createEpochProducers = (epoch: IEpoch, baseEntities: Record<string, IEntityBase>, itemMap: Record<string, number>, nextId: number): [number, IProduction[]] => {
   const out = Object.keys(baseEntities).map((key) => createProducer(
-    epoch.overrides[key]?.producerName ?? key, 
+    epoch.overrides[key]?.producerName ?? baseEntities[key].producerName, 
     nextId++,
     epoch.overrides[key]?.producerDescription ?? baseEntities[key].producerDescription, 
     "",

@@ -13,5 +13,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./item"), exports);
 __exportStar(require("./storage"), exports);
 __exportStar(require("./production"), exports);
-__exportStar(require("./gql"), exports);
 ;

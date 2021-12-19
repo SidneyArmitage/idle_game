@@ -8,8 +8,9 @@ export interface IEntityBase {
   input: [string, number][];
   storageCategory: EStorageCategory;
   itemDescription: string;
-  producer: string;
   producerDescription: string;
+  itemName: string;
+  producerName: string;
 }
 
 export interface IOverride {
