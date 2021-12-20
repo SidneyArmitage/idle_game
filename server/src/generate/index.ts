@@ -1,5 +1,6 @@
 import { EStorageCategory, IItem, IProduction } from "shared";
-import { default as generateItems } from "./items";
+import generateItems from "./items";
+import generateProduction from "./production";
 
 export interface IEntityBase {
   time: number;
@@ -39,12 +40,14 @@ export interface ITier {
 
 export interface IResources {
   items: IItem[];
-  // production: IProduction[];
+  production: IProduction[];
 }
 
 export default (tier: Record<string, ITier>, tierItems: Record<string, IEntityBase>, epoch: Record<string, IEpoch>, epochItems: Record<string, IEntityBase>): IResources => {
+  const items = generateItems(tier, tierItems, epoch, epochItems);
   return {
-    items: generateItems(tier, tierItems, epoch, epochItems),
+    items,
+    production: generateProduction(tier, tierItems, epoch, epochItems, {}),
   }
 }
 

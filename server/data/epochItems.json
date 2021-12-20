@@ -4,6 +4,7 @@
     "value": 1,
     "output": ["{{item}}", 1],
     "storageCategory": 1,
+    "itemName": "wood",
     "producerDescription": "{{this}} produces {{item}} to be used as a dirty fuel and to make more advanced products.",
     "itemDescription": "{{this}} is a dirty fuel and an important component of more advanced products."
   },
@@ -11,6 +12,8 @@
     "time": 2,
     "value": 2,
     "producerDescription": "{{this}} produces {{item}} which is a higher tier fuel to make advanced products.",
-    "itemDescription": "{{this}} is a higher tier fuel to make advanced products."
+    "itemDescription": "{{this}} is a higher tier fuel to make advanced products.",
+    "itemName": "coal",
+    "storageCategory": 1
   }
 }

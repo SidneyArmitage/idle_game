@@ -1,12 +1,13 @@
 import { IItem, EStorageCategory, IProduction, IGetItem } from "shared";
 import { reset } from "../config/reset";
+import Subscribable from "../util/subscribable";
 import { Modifiers } from "./modifier";
 import { getConsumption, getOutput, getTime } from "./production";
 import { IResearch } from "./research";
 import { getFree, IStorage } from "./storage";
 
 export class SimulationControl {
-  private items: Record<number, IItem>; // static
+  private items: Subscribable<Record<number, IItem>>; // static
   private storage: Record<EStorageCategory, IStorage>; // resets
   private production: Record<number, IProduction>; // changes (resets a bit)
   // modifier is stored by type, what item it affects which is defined by type and then what effect it has
@@ -16,26 +17,35 @@ export class SimulationControl {
   private unlockedResearch: number[]; // changes
   private unlockableResearch: number[]; // changes
 
-  constructor (items: Record<number, IItem>, production: Record<number, IProduction>, {storage, modifier, purchasedResearch} = reset()){
-    this.items = items;
+  constructor ({storage, modifier, purchasedResearch} = reset()){
     this.research = {};
     this.unlockedResearch = [];
     this.unlockableResearch = [];
     this.storage = storage;
-    this.production = production;
+    this.items = new Subscribable({});
+    this.production = {};
     this.modifier = modifier;
     this.purchasedResearch = purchasedResearch;
+  }
+
+  init(items: Record<number, IItem>, production: Record<number, IProduction>) {
+    this.items.set(items);
+    this.production = production;
   }
 
   step() {
     throw Error("Not implemented");
   }
 
+  getSubscribable() {
+    return this.items
+  }
+
   // getItems(getAmounts: boolean): IGetItem[];
   getItems(getAmounts: true, filter: number): IGetItem[];
   getItems(getAmounts: false, filter: number): IItem[];
   getItems(getAmounts: boolean, filter: number): IItem[] {
-    return Object.values(this.items).filter((item) => (filter & item.storageCategory) > 0).map((item) => (
+    return Object.values(this.items.get()).filter((item) => (filter & item.storageCategory) > 0).map((item) => (
       {
         ...item,
         ...(getAmounts ? {
@@ -46,15 +56,16 @@ export class SimulationControl {
   }
 
   getItem(key: number) {
-    return this.items[key];
+    return this.items.get()[key];
   }
 
   getProductions() {
+    const items = this.items.get();
     return Object.values(this.production).map((producer) => ({
       ...producer,
-      time: getTime(producer, this.modifier, this.items),
-      output: getOutput(producer, this.modifier, this.items),
-      consumption: getConsumption(producer, this.modifier, this.items),
+      time: getTime(producer, this.modifier, items),
+      output: getOutput(producer, this.modifier, items),
+      consumption: getConsumption(producer, this.modifier, items),
     }));
   }
 

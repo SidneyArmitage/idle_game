@@ -1,5 +1,5 @@
 import { Routes, BrowserRouter, Route } from 'react-router-dom';
-import { EStorageCategory } from 'shared';
+import { EStorageCategory, IItem } from 'shared';
 import './App.scss';
 import { Layout } from './components/layout';
 import { Items } from './components/pages/items';
@@ -14,6 +14,7 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
+import { useEffect, useState } from 'react';
 
 const query = gql`
   query resources {
@@ -29,11 +30,28 @@ const query = gql`
   }
 `;
 
+interface IQuery {
+  resources: {
+    items: IItem[]
+  }
+}
+
 export const App = () => {
-  const control = new SimulationControl(arrayToMap(items), arrayToMap(producers));
-  const { loading, data } = useQuery(query);
-  console.log(loading);
-  console.log(data);
+  const control = new SimulationControl();
+  const { loading, data } = useQuery<IQuery>(query);
+  const [ ready, setReady ] = useState(false);
+  useEffect(() => {
+    if (!loading) {
+      if (!data) {
+        return;
+      }
+      control.init(arrayToMap(data?.resources.items), {});
+      setReady(true);
+    }
+  }, [loading, ready]);
+  if (!ready) {
+    return (<>Loading...</>);
+  }
   return (
     <>
       <BrowserRouter>
