@@ -1,6 +1,6 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  displayName: "server",
+  displayName: "shared",
   roots: ["<rootDir>"],
   preset: 'ts-jest',
   testEnvironment: 'node',
