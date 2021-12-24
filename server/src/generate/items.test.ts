@@ -48,8 +48,8 @@ describe("create Tier Items", () => {
     ];
     expect(createTierItems({
       value: 1,
-      burn: ["wood"],
-      tool: ["wood"],
+      burn: "wood",
+      tool: "wood",
       luxury: {},
       overrides: {
         generation: {
@@ -87,7 +87,12 @@ describe("create Tier Items", () => {
         itemName: "",
         producerDescription: "",
       },
-    }, 0)).toStrictEqual([2, expected]);
+    }, 0)).toStrictEqual([2, expected, {
+      "Tin ore": 0,
+      "Tin ingot": 1,
+      "Tin-generation": 0,
+      "Tin-refinement": 1,
+    }]);
   });
 
   it("creates all of the base items for the tier with a default", () => {
@@ -102,8 +107,8 @@ describe("create Tier Items", () => {
     ];
     expect(createTierItems({
       value: 1,
-      burn: ["wood"],
-      tool: ["wood"],
+      burn: "wood",
+      tool: "wood",
       luxury: {},
       overrides: {
       },
@@ -121,7 +126,10 @@ describe("create Tier Items", () => {
         itemName: "{{resource}}",
         producerDescription: "",
       }, 
-    }, 0)).toStrictEqual([1, expected]);
+    }, 0)).toStrictEqual([1, expected, {
+      "Tin": 0,
+      "Tin-generation": 0,
+    }]);
   });
 
 });
@@ -152,6 +160,7 @@ describe("create Epoch Items", () => {
           itemName: "coal",
         }
       },
+      name: "default",
     },
     {
       wood: {
@@ -177,7 +186,12 @@ describe("create Epoch Items", () => {
         itemName: "",
         producerDescription: "",
       }
-    }, 0)).toStrictEqual([2, output]);
+    }, 0)).toStrictEqual([2, output, {
+      "wood": 0,
+      "coal": 1,
+      "default-wood": 0,
+      "default-burn": 1,
+    }]);
   });
 
 });
@@ -218,8 +232,8 @@ describe("generate items (default)", () => {
     expect(generatesItems({
       tin: {
         value: 1,
-        burn: ["wood"],
-        tool: ["wood"],
+        burn: "wood",
+        tool: "wood",
         luxury: {},
         overrides: {
           generation: {
@@ -268,6 +282,7 @@ describe("generate items (default)", () => {
             itemName: "coal",
           }
         },
+        name: "ancient",
       },
     },
     {
@@ -295,7 +310,16 @@ describe("generate items (default)", () => {
         itemName: "",
         producerDescription: "",
       }
-    })).toStrictEqual(expected);
+    })).toStrictEqual([expected, {
+      "wood": 0,
+      "coal": 1,
+      "Tin ore": 2,
+      "Tin ingot": 3,
+      "ancient-wood": 0,
+      "ancient-burn": 1,
+      "Tin-generation": 2,
+      "Tin-refinement": 3,
+    }]);
   });
 
 });

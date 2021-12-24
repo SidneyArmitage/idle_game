@@ -1,8 +1,8 @@
 {
   "stone": {
     "value": 1,
-    "burn": [],
-    "tool": [],
+    "burn": "wood",
+    "tool": "wood",
     "luxury": {
     },
     "resource": "Stone",
@@ -23,14 +23,15 @@
   },
   "tin": {
     "value": 2,
-    "burn": ["wood"],
-    "tool": ["stone"],
+    "burn": "wood",
+    "tool": "stone",
     "resource": "Tin",
     "luxury": {
     },
     "overrides": {
       "generation": {
-        "itemName": "Tin Mine"
+        "itemName": "Tin Ingot",
+        "producerName": "Tin Mine"
       }
     }
   }

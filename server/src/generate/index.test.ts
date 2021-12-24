@@ -1,10 +1,10 @@
 import { EStorageCategory } from "shared";
-import { default as generate } from ".";
+import { default as generate, IResources } from ".";
 
 describe("generate", () => {
 
   it("generates items", () => {
-    const expected = {
+    const expected: IResources = {
       items: [
         {
           id: 0,
@@ -34,13 +34,59 @@ describe("generate", () => {
           name: "Tin ingot",
           storageCategory: EStorageCategory.MANUFACTURED,
         },
-      ]
+      ],
+      production: [
+        {
+          id: 0,
+          description: "",
+          icon: "",
+          name: "",
+          amount: 0,
+          consumption: [],
+          output: [],
+          time: 0,
+          progress: 0,
+        },
+        {
+          id: 1,
+          description: "",
+          icon: "",
+          name: "",
+          amount: 0,
+          consumption: [],
+          output: [],
+          time: 0,
+          progress: 0,
+        },
+        {
+          id: 2,
+          description: "",
+          icon: "",
+          name: "",
+          amount: 0,
+          consumption: [],
+          output: [[2, 1]],
+          time: 0,
+          progress: 0,
+        },
+        {
+          id: 3,
+          description: "",
+          icon: "",
+          name: "",
+          amount: 0,
+          consumption: [],
+          output: [],
+          time: 0,
+          progress: 0,
+        }
+      ],
     };
     expect(generate({
       tin: {
         value: 1,
-        burn: ["wood"],
-        tool: ["wood"],
+        burn: "wood",
+        tool: "wood",
         luxury: {},
         overrides: {
           generation: {
@@ -62,7 +108,7 @@ describe("generate", () => {
           value: 0,
           itemDescription: "{{this}} the precursor to its more processed and useful form",
           input: [],
-          output: [],
+          output: [["{{item}}", 1]],
 
           producerName: "",
           itemName: "",
@@ -89,6 +135,7 @@ describe("generate", () => {
               itemName: "coal",
             }
           },
+          name: "ancient"
         },
       },
       {

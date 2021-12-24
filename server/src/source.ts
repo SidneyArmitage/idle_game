@@ -20,7 +20,6 @@ export const source = async <T>(st: (path: PathLike) => any, paths: PathLike[], 
     if (isSame === false) {
       cache = await fn();
     }
-    console.log(cache);
     return cache;
   };
 };

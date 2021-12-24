@@ -1,6 +1,7 @@
 {
   "primitive": {
     "value": 1,
+    "name": "primitive",
     "overrides": {
       "wood": {
       },

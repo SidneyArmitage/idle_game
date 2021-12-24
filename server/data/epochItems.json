@@ -2,15 +2,20 @@
   "wood": {
     "time": 1,
     "value": 1,
-    "output": ["{{item}}", 1],
+    "output": [["{{item}}", 1]],
+    "input": [],
     "storageCategory": 1,
     "itemName": "wood",
+    "producerName": "",
     "producerDescription": "{{this}} produces {{item}} to be used as a dirty fuel and to make more advanced products.",
     "itemDescription": "{{this}} is a dirty fuel and an important component of more advanced products."
   },
   "burn": {
     "time": 2,
     "value": 2,
+    "input": [],
+    "output": [["{{item}}", 1]],
+    "producerName": "{{item}} mine",
     "producerDescription": "{{this}} produces {{item}} which is a higher tier fuel to make advanced products.",
     "itemDescription": "{{this}} is a higher tier fuel to make advanced products.",
     "itemName": "coal",

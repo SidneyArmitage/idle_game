@@ -1,0 +1,70 @@
+{
+  "type": "object",
+  "$ref": "#/definitions/main",
+  "definitions": {
+    "main": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["time", "value", "output", "input", "itemDescription", "producerDescription", "itemName", "producerName"],
+        "time": {
+          "type": "number"
+        },
+        "value": {
+          "time": {
+            "type": "number"
+          },
+          "output": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": false,
+              "prefixItems": [{
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          },
+          "input": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "prefixItems": [{
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          },
+          "itemDescription": {
+            "type": "string"
+          },
+          "producerDescription": {
+            "type": "string"
+          },
+          "itemName": {
+            "type": "string"
+          },
+          "producerName": {
+            "type": "string"
+          },
+          "storageCategory": {
+            "enum": [
+              1,
+              2,
+              4,
+              8
+            ]
+          }
+        }
+      }
+    }
+  }
+}

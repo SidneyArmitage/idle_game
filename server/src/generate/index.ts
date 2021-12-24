@@ -27,12 +27,13 @@ export interface IOverride {
 export interface IEpoch {
   value: number;
   overrides: Record<string, IOverride>;
+  name: string;
 }
 
 export interface ITier {
   value: number;
-  burn: string[];
-  tool: string[];
+  burn: string;
+  tool: string;
   luxury: IOverride;
   overrides: Record<string, IOverride>;
   resource: string;
@@ -46,9 +47,9 @@ export interface IResources {
 export default (tier: Record<string, ITier>, tierItems: Record<string, IEntityBase>, epoch: Record<string, IEpoch>, epochItems: Record<string, IEntityBase>): IResources => {
   const items = generateItems(tier, tierItems, epoch, epochItems);
   return {
-    items,
-    production: generateProduction(tier, tierItems, epoch, epochItems, {}),
-  }
+    items: items[0],
+    production: generateProduction(tier, tierItems, epoch, epochItems, items[1]),
+  };
 }
 
 export const items = generateItems;
