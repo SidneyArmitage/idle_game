@@ -1,13 +1,11 @@
 import { Routes, BrowserRouter, Route } from 'react-router-dom';
-import { EStorageCategory, IItem } from 'shared';
+import { EStorageCategory, IItem, IProduction } from 'shared';
 import './App.scss';
 import { Layout } from './components/layout';
 import { Items } from './components/pages/items';
 import { Production } from './components/pages/production';
 import { Research } from './components/pages/research';
 import { Detailed, Storage, Summary } from './components/pages/storage';
-import items from './config/items';
-import producers from './config/producers';
 import { SimulationControl } from './data/control';
 import { arrayToMap } from './util/arrayToMap';
 import {
@@ -26,15 +24,32 @@ const query = gql`
         id
         icon
       }
+      production {
+        consumption {
+          key
+          value
+        }
+        output {
+          key
+          value
+        }
+        description
+        name
+        time
+        progress
+        id
+        icon
+      }
     }
   }
 `;
 
 interface IQuery {
   resources: {
-    items: IItem[]
-  }
-}
+    items: IItem[];
+    production: IProduction[];
+  };
+};
 
 export const App = () => {
   const control = new SimulationControl();
@@ -45,7 +60,11 @@ export const App = () => {
       if (!data) {
         return;
       }
-      control.init(arrayToMap(data?.resources.items), {});
+      control.init(arrayToMap(data?.resources.items), arrayToMap(data?.resources.production.map(({consumption, output, ...rest}) => ({
+        ...rest,
+        consumption: consumption.map((element: any) => [element.key as number, element.value as number]),
+        output: output.map((element: any) => [element.key as number, element.value as number]),
+      }))));
       setReady(true);
     }
   }, [loading, ready]);
