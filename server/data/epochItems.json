@@ -6,7 +6,7 @@
     "input": [],
     "storageCategory": 1,
     "itemName": "wood",
-    "producerName": "",
+    "producerName": "{{item}} producer",
     "producerDescription": "{{this}} produces {{item}} to be used as a dirty fuel and to make more advanced products.",
     "itemDescription": "{{this}} is a dirty fuel and an important component of more advanced products."
   },

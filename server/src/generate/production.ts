@@ -83,7 +83,7 @@ export default (tier: Record<string, ITier>, tierItems: Record<string, IEntityBa
         ...itemMap,
         ...Object.keys(epochItems).reduce((acc, cur) => ({
           ...acc,
-          [`{{${cur}}}`]: itemMap[`${e.name}-burn`],
+          [`{{${cur}}}`]: itemMap[`${e.name}-${cur}`],
         }), {}),
       };
       return [...acc, ...epochOut[1], ...Object.values(tier).reduce((acc, t) => {

@@ -4,6 +4,7 @@
     "name": "primitive",
     "overrides": {
       "wood": {
+        "producerName": "Lumberjack"
       },
       "burn": {
         "itemName":"coal"

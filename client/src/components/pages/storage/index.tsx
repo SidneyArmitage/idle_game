@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-export { Summary } from "./summary";
 export { Detailed } from "./detailed";
+export { Summary } from "./summary";
 
 export const Storage = () => {
   return (

@@ -99,308 +99,308 @@ export default {
   ],
   production: [
     {
-      __typename: "Production",
-      consumption: [],
-      output: [
+      "__typename": "Production",
+      "consumption": [],
+      "output": [
         {
-          __typename: "Tuple",
-          key: 0,
-          value: 1
+          "__typename": "Tuple",
+          "key": 0,
+          "value": 1
         }
       ],
-      description: "produces wood to be used as a dirty fuel and to make more advanced products.",
-      name: "",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 0,
-      icon: ""
+      "description": " produces wood to be used as a dirty fuel and to make more advanced products.",
+      "name": "Lumber jack",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 0,
+      "icon": ""
     },
     {
-      __typename: "Production",
-      consumption: [],
-      output: [
+      "__typename": "Production",
+      "consumption": [],
+      "output": [
         {
-          __typename: "Tuple",
-          key: 1,
-          value: 1
+          "__typename": "Tuple",
+          "key": 1,
+          "value": 1
         }
       ],
-      description: "coal mine produces coal which is a higher tier fuel to make advanced products.",
-      name: "coal mine",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 1,
-      icon: ""
+      "description": "coal mine produces coal which is a higher tier fuel to make advanced products.",
+      "name": "coal mine",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 1,
+      "icon": ""
     },
     {
-      __typename: "Production",
-      consumption: [
+      "__typename": "Production",
+      "consumption": [
         {
-          key: 4,
-          value: 1,
-          __typename: "Tuple"
+          "key": 4,
+          "value": 1,
+          "__typename": "Tuple"
         },
         {
-          key: 1,
-          value: 1,
-          __typename: "Tuple"
+          "key": 0,
+          "value": 1,
+          "__typename": "Tuple"
         }
       ],
-      output: [
+      "output": [
         {
-          __typename: "Tuple",
-          key: 2,
-          value: 1
+          "__typename": "Tuple",
+          "key": 2,
+          "value": 1
         }
       ],
-      description: "A hard working Sculptor produces Idles to improve quality of life.",
-      name: "Sculptor",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 2,
-      icon: ""
+      "description": "A hard working Sculptor produces Idles to improve quality of life.",
+      "name": "Sculptor",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 2,
+      "icon": ""
     },
     {
-      __typename: "Production",
-      consumption: [],
-      output: [
+      "__typename": "Production",
+      "consumption": [],
+      "output": [
         {
-          __typename: "Tuple",
-          key: 3,
-          value: 1
+          "__typename": "Tuple",
+          "key": 3,
+          "value": 1
         }
       ],
-      description: "A hard working Quarry produces Stone to be further refined and power the economy.",
-      name: "Quarry",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 3,
-      icon: ""
+      "description": "A hard working Quarry produces Stone to be further refined and power the economy.",
+      "name": "Quarry",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 3,
+      "icon": ""
     },
     {
-      __typename: "Production",
-      consumption: [
+      "__typename": "Production",
+      "consumption": [
         {
-          key: 3,
-          value: 1,
-          __typename: "Tuple"
+          "key": 3,
+          "value": 1,
+          "__typename": "Tuple"
         },
         {
-          key: 1,
-          value: 1,
-          __typename: "Tuple"
+          "key": 1,
+          "value": 1,
+          "__typename": "Tuple"
         }
       ],
-      output: [
+      "output": [
         {
-          __typename: "Tuple",
-          key: 4,
-          value: 1
+          "__typename": "Tuple",
+          "key": 4,
+          "value": 1
         }
       ],
-      description: "A hard working Stone mason produces Stone Blocks to build more complex goods and items.",
-      name: "Stone mason",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 4,
-      icon: ""
+      "description": "A hard working Stone mason produces Stone Blocks to build more complex goods and items.",
+      "name": "Stone mason",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 4,
+      "icon": ""
     },
     {
-      __typename: "Production",
-      consumption: [
+      "__typename": "Production",
+      "consumption": [
         {
-          key: 4,
-          value: 1,
-          __typename: "Tuple"
+          "key": 4,
+          "value": 1,
+          "__typename": "Tuple"
         },
         {
-          key: 1,
-          value: 2,
-          __typename: "Tuple"
+          "key": 0,
+          "value": 2,
+          "__typename": "Tuple"
         }
       ],
-      output: [
+      "output": [
         {
-          __typename: "Tuple",
-          key: 5,
-          value: 1
+          "__typename": "Tuple",
+          "key": 5,
+          "value": 1
         }
       ],
-      description: "A hard working Stone tool smith produces Stone tools to manufacture more complex goods.",
-      name: "Stone tool smith",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 5,
-      icon: ""
+      "description": "A hard working Stone tool smith produces Stone tools to manufacture more complex goods.",
+      "name": "Stone tool smith",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 5,
+      "icon": ""
     },
     {
-      __typename: "Production",
-      consumption: [
+      "__typename": "Production",
+      "consumption": [
         {
-          key: 4,
-          value: 1,
-          __typename: "Tuple"
+          "key": 4,
+          "value": 1,
+          "__typename": "Tuple"
         },
         {
-          key: 1,
-          value: 1,
-          __typename: "Tuple"
+          "key": 0,
+          "value": 1,
+          "__typename": "Tuple"
         }
       ],
-      output: [
+      "output": [
         {
-          __typename: "Tuple",
-          key: 6,
-          value: 2
+          "__typename": "Tuple",
+          "key": 6,
+          "value": 2
         }
       ],
-      description: "A hard working Stone artisan produces Stone components for sale to other markets.",
-      name: "Stone artisan",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 6,
-      icon: ""
+      "description": "A hard working Stone artisan produces Stone components for sale to other markets.",
+      "name": "Stone artisan",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 6,
+      "icon": ""
     },
     {
-      __typename: "Production",
-      consumption: [
+      "__typename": "Production",
+      "consumption": [
         {
-          key: 9,
-          value: 1,
-          __typename: "Tuple"
+          "key": 9,
+          "value": 1,
+          "__typename": "Tuple"
         },
         {
-          key: 1,
-          value: 1,
-          __typename: "Tuple"
+          "key": 0,
+          "value": 1,
+          "__typename": "Tuple"
         }
       ],
-      output: [
+      "output": [
         {
-          __typename: "Tuple",
-          key: 7,
-          value: 1
+          "__typename": "Tuple",
+          "key": 7,
+          "value": 1
         }
       ],
-      description: "A hard working Tin artisan produces Tin luxury to improve quality of life.",
-      name: "Tin artisan",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 7,
-      icon: ""
+      "description": "A hard working Tin artisan produces Tin luxury to improve quality of life.",
+      "name": "Tin artisan",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 7,
+      "icon": ""
     },
     {
-      __typename: "Production",
-      consumption: [],
-      output: [
+      "__typename": "Production",
+      "consumption": [],
+      "output": [
         {
-          __typename: "Tuple",
-          key: 8,
-          value: 1
+          "__typename": "Tuple",
+          "key": 8,
+          "value": 1
         }
       ],
-      description: "A hard working Tin Mine produces Tin Ingot to be further refined and power the economy.",
-      name: "Tin Mine",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 8,
-      icon: ""
+      "description": "A hard working Tin Mine produces Tin Ingot to be further refined and power the economy.",
+      "name": "Tin Mine",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 8,
+      "icon": ""
     },
     {
-      __typename: "Production",
-      consumption: [
+      "__typename": "Production",
+      "consumption": [
         {
-          key: 8,
-          value: 1,
-          __typename: "Tuple"
+          "key": 8,
+          "value": 1,
+          "__typename": "Tuple"
         },
         {
-          key: 1,
-          value: 1,
-          __typename: "Tuple"
+          "key": 1,
+          "value": 1,
+          "__typename": "Tuple"
         }
       ],
-      output: [
+      "output": [
         {
-          __typename: "Tuple",
-          key: 9,
-          value: 1
+          "__typename": "Tuple",
+          "key": 9,
+          "value": 1
         }
       ],
-      description: "A hard working Tin smith produces Tin ingot to build more complex goods and items.",
-      name: "Tin smith",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 9,
-      icon: ""
+      "description": "A hard working Tin smith produces Tin ingot to build more complex goods and items.",
+      "name": "Tin smith",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 9,
+      "icon": ""
     },
     {
-      __typename: "Production",
-      consumption: [
+      "__typename": "Production",
+      "consumption": [
         {
-          key: 9,
-          value: 1,
-          __typename: "Tuple"
+          "key": 9,
+          "value": 1,
+          "__typename": "Tuple"
         },
         {
-          key: 1,
-          value: 2,
-          __typename: "Tuple"
+          "key": 0,
+          "value": 2,
+          "__typename": "Tuple"
         }
       ],
-      output: [
+      "output": [
         {
-          __typename: "Tuple",
-          key: 10,
-          value: 1
+          "__typename": "Tuple",
+          "key": 10,
+          "value": 1
         }
       ],
-      description: "A hard working Tin tool smith produces Tin tools to manufacture more complex goods.",
-      name: "Tin tool smith",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 10,
-      icon: ""
+      "description": "A hard working Tin tool smith produces Tin tools to manufacture more complex goods.",
+      "name": "Tin tool smith",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 10,
+      "icon": ""
     },
     {
-      __typename: "Production",
-      consumption: [
+      "__typename": "Production",
+      "consumption": [
         {
-          key: 9,
-          value: 1,
-          __typename: "Tuple"
+          "key": 9,
+          "value": 1,
+          "__typename": "Tuple"
         },
         {
-          key: 1,
-          value: 1,
-          __typename: "Tuple"
+          "key": 0,
+          "value": 1,
+          "__typename": "Tuple"
         }
       ],
-      output: [
+      "output": [
         {
-          __typename: "Tuple",
-          key: 11,
-          value: 2
+          "__typename": "Tuple",
+          "key": 11,
+          "value": 2
         }
       ],
-      description: "A hard working Tin artisan produces Tin components for sale to other markets.",
-      name: "Tin artisan",
-      amount: 0,
-      time: 0,
-      progress: 0,
-      id: 11,
-      icon: ""
+      "description": "A hard working Tin artisan produces Tin components for sale to other markets.",
+      "name": "Tin artisan",
+      "amount": 0,
+      "time": 0,
+      "progress": 0,
+      "id": 11,
+      "icon": ""
     }
   ],
   __typename: "Resources"
