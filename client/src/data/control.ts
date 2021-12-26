@@ -6,10 +6,14 @@ import { getConsumption, getOutput, getTime } from "./production";
 import { IResearch } from "./research";
 import { getFree, IStorage } from "./storage";
 
+export enum ESubscribables {
+  ITEM,
+  PRODUCER,
+}
 export class SimulationControl {
   private items: Subscribable<Record<number, IItem>>; // static
   private storage: Record<EStorageCategory, IStorage>; // resets
-  private production: Record<number, IProduction>; // changes (resets a bit)
+  private producers: Subscribable<Record<number, IProduction>>; // changes (resets a bit)
   // modifier is stored by type, what item it affects which is defined by type and then what effect it has
   private modifier: Modifiers; // resets
   private research: Record<number, IResearch>; // static
@@ -23,22 +27,29 @@ export class SimulationControl {
     this.unlockableResearch = [];
     this.storage = storage;
     this.items = new Subscribable({});
-    this.production = {};
+    this.producers = new Subscribable({});
     this.modifier = modifier;
     this.purchasedResearch = purchasedResearch;
   }
 
   init(items: Record<number, IItem>, production: Record<number, IProduction>) {
     this.items.set(items);
-    this.production = production;
+    this.producers.set(production);
   }
 
   step() {
     throw Error("Not implemented");
   }
 
-  getSubscribable() {
-    return this.items
+  getSubscribable(id: ESubscribables) {
+    switch(id) {
+      case ESubscribables.ITEM:
+        return this.items;
+      case ESubscribables.PRODUCER:
+        return this.producers;
+      default:
+        throw Error("Bad state");
+    }
   }
 
   // getItems(getAmounts: boolean): IGetItem[];
@@ -59,9 +70,9 @@ export class SimulationControl {
     return this.items.get()[key];
   }
 
-  getProductions() {
+  getProducers() {
     const items = this.items.get();
-    return Object.values(this.production).map((producer) => ({
+    return Object.values(this.producers.get()).map((producer) => ({
       ...producer,
       time: getTime(producer, this.modifier, items),
       output: getOutput(producer, this.modifier, items),
@@ -69,8 +80,8 @@ export class SimulationControl {
     }));
   }
 
-  getProduction(key: number) {
-    return this.production[key];
+  getProducer(key: number) {
+    return this.producers.get()[key];
   }
 
   getStore(key: EStorageCategory) {

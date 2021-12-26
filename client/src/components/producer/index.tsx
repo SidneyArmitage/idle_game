@@ -23,13 +23,13 @@ export const Producer = ({isExpanded: isFocused, name, id, progress, time, contr
         {consumption.length > 0 ? (
           <div>
             Inputs:
-            {consumption.map((cur) => <Item current={cur[1]} {...{...control.getItem(cur[0])}}/>)}
+            {consumption.map((cur, index) => <Item key={index} current={cur[1]} {...{...control.getItem(cur[0])}}/>)}
           </div>
         ) : ""}
         {output.length > 0 ? (
           <div>
             Outputs:
-            {output.map((cur) => <Item current={cur[1]} {...{...control.getItem(cur[0])}}/>)}
+            {output.map((cur, index) => <Item key={index} current={cur[1]} {...{...control.getItem(cur[0])}}/>)}
           </div>
         ) : ""}
       </> : ""}

@@ -2,11 +2,11 @@ import { SimulationControl } from "../../../data/control";
 import { EStorageCategory } from "shared";
 import { Store } from "../../store";
 
-interface ISummaryProps {
+interface IProps {
   control: SimulationControl
 }
 
-export const Summary = ({control}: ISummaryProps) => {
+export const Summary = ({control}: IProps) => {
   return (
     <>
       <Store {...control.getStore(EStorageCategory.BULK)}/>

@@ -1,17 +1,19 @@
-import { SimulationControl } from "../../../data/control";
+import { ESubscribables, SimulationControl } from "../../../data/control";
 import { EStorageCategory, IGetItem } from "shared";
 import { Item } from "../../item";
 import { useEffect, useState } from "react";
 
-interface IItemsProps {
-  control: SimulationControl
+interface IProps {
+  control: SimulationControl;
+  setTitle: (title: string) => void;
 }
 
-export const Items = ({control}: IItemsProps) => {
+export const Items = ({control, setTitle}: IProps) => {
   const [items, setItems] = useState(control.getItems(true, EStorageCategory.BULK | EStorageCategory.MANUFACTURED | EStorageCategory.EXOTIC));
   useEffect(() => {
+    setTitle("Items");
     setItems(control.getItems(true, EStorageCategory.BULK | EStorageCategory.MANUFACTURED | EStorageCategory.EXOTIC));
-    const subscribable = control.getSubscribable();
+    const subscribable = control.getSubscribable(ESubscribables.ITEM);
     const subscription = subscribable.subscribe(() => {
       setItems(control.getItems(true, EStorageCategory.BULK | EStorageCategory.MANUFACTURED | EStorageCategory.EXOTIC));
     });
@@ -21,7 +23,6 @@ export const Items = ({control}: IItemsProps) => {
   }, []);
   return (
     <>
-      <h1>Items</h1>
       {items.map((item, index) => (<Item key={index} {...item}/>))}
     </>
   );

@@ -8,6 +8,7 @@ import { SimulationControl } from './data/control';
 import { arrayToMap } from './util/arrayToMap';
 import storage from './route/storage';
 import production from './route/production';
+import StateControl from "./stateControl";
 import {
   useQuery,
   gql
@@ -53,6 +54,7 @@ interface IQuery {
 
 export const App = () => {
   const control = new SimulationControl();
+  const stateControl = new StateControl();
   const { loading, data } = useQuery<IQuery>(query);
   const [ ready, setReady ] = useState(false);
   useEffect(() => {
@@ -75,11 +77,11 @@ export const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element ={<Layout/>}>
-            <Route path="items" element={<Items control={control}/>}/>
-            {storage(control)}
-            {production(control)}
-            <Route path="research" element={<Research/>}/>
+          <Route path="/" element ={<Layout titleSetter={(title) => stateControl.setTitleSetter(title)}/>}>
+            <Route path="items" element={<Items control={control} setTitle={(title) => stateControl.titleSetter(title)}/>}/>
+            {storage(control, (title) => stateControl.titleSetter(title))}
+            {production(control, (title) => stateControl.titleSetter(title))}
+            <Route path="research" element={<Research setTitle={(title) => stateControl.titleSetter(title)}/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

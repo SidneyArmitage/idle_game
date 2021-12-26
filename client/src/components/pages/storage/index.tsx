@@ -1,11 +1,18 @@
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 export { Detailed } from "./detailed";
 export { Summary } from "./summary";
 
-export const Storage = () => {
+interface IProps {
+  setTitle: (title: string) => void;
+}
+
+export const Storage = ({setTitle}: IProps) => {
+  useEffect(() => {
+    setTitle("Storage");
+  }, []);
   return (
     <>
-      <h1>Storage</h1>
       <Outlet/>
     </>
   );

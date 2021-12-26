@@ -3,12 +3,12 @@ import { SimulationControl } from "../../../data/control";
 import { getFree } from "../../../data/storage";
 import { Item } from "../../item";
 
-interface IDetailedProps {
+interface IProps {
   control: SimulationControl;
   id: EStorageCategory;
 }
 
-export const Detailed = ({control, id}: IDetailedProps) => {
+export const Detailed = ({control, id}: IProps) => {
   const store = control.getStore(id);
   const free = getFree(store);
   // @ts-ignore

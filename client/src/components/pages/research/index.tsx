@@ -1,7 +1,17 @@
-export const Research = () => {
+import { useEffect } from "react";
+
+interface IProps {
+  setTitle: (title: string) => void;
+}
+
+
+export const Research = ({setTitle}: IProps) => {
+  useEffect(() => {
+    setTitle("Research");
+  }, []);
   return (
     <>
-      <h1>Research</h1>
+      nothing to show...
     </>
   );
 };
