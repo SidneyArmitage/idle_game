@@ -2,7 +2,7 @@ import { IItem, EStorageCategory, IProduction, IGetItem } from "shared";
 import { reset } from "../config/reset";
 import Subscribable from "../util/subscribable";
 import { Modifiers } from "./modifier";
-import { getConsumption, getOutput, getTime } from "./production";
+import { getConsumption, getOutput, getTime, produce } from "./production";
 import { IResearch } from "./research";
 import { getFree, IStorage } from "./storage";
 
@@ -10,6 +10,7 @@ export enum ESubscribables {
   ITEM,
   PRODUCER,
 }
+
 export class SimulationControl {
   private items: Subscribable<Record<number, IItem>>; // static
   private storage: Record<EStorageCategory, IStorage>; // resets
@@ -20,6 +21,7 @@ export class SimulationControl {
   private purchasedResearch: number[]; // resets
   private unlockedResearch: number[]; // changes
   private unlockableResearch: number[]; // changes
+  private previousFrame: number;
 
   constructor ({storage, modifier, purchasedResearch} = reset()){
     this.research = {};
@@ -30,6 +32,7 @@ export class SimulationControl {
     this.producers = new Subscribable({});
     this.modifier = modifier;
     this.purchasedResearch = purchasedResearch;
+    this.previousFrame = Date.now();
   }
 
   init(items: Record<number, IItem>, production: Record<number, IProduction>) {
@@ -37,8 +40,10 @@ export class SimulationControl {
     this.producers.set(production);
   }
 
-  step() {
-    throw Error("Not implemented");
+  step(delta: number) {
+    const producers = this.getProducers();
+    producers.map(producer => produce(producer, this.modifier, this.items.get(), this.storage, delta));
+    this.producers.set(producers);
   }
 
   getSubscribable(id: ESubscribables) {
@@ -97,4 +102,14 @@ export class SimulationControl {
     this.modifier = modifier;
     this.purchasedResearch = purchasedResearch;
   }
+
+  start() {
+    const animate = (time: number) => {
+      this.step(this.previousFrame - time);
+      this.previousFrame = time;
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  }
+
 };

@@ -110,8 +110,8 @@ export default {
       ],
       "description": " produces wood to be used as a dirty fuel and to make more advanced products.",
       "name": "Lumber jack",
-      "amount": 0,
-      "time": 0,
+      "amount": 1,
+      "time": 1,
       "progress": 0,
       "id": 0,
       "icon": ""
@@ -129,7 +129,7 @@ export default {
       "description": "coal mine produces coal which is a higher tier fuel to make advanced products.",
       "name": "coal mine",
       "amount": 0,
-      "time": 0,
+      "time": 1,
       "progress": 0,
       "id": 1,
       "icon": ""
@@ -158,7 +158,7 @@ export default {
       "description": "A hard working Sculptor produces Idles to improve quality of life.",
       "name": "Sculptor",
       "amount": 0,
-      "time": 0,
+      "time": 1,
       "progress": 0,
       "id": 2,
       "icon": ""
@@ -176,7 +176,7 @@ export default {
       "description": "A hard working Quarry produces Stone to be further refined and power the economy.",
       "name": "Quarry",
       "amount": 0,
-      "time": 0,
+      "time": 1,
       "progress": 0,
       "id": 3,
       "icon": ""
@@ -205,7 +205,7 @@ export default {
       "description": "A hard working Stone mason produces Stone Blocks to build more complex goods and items.",
       "name": "Stone mason",
       "amount": 0,
-      "time": 0,
+      "time": 1,
       "progress": 0,
       "id": 4,
       "icon": ""
@@ -234,7 +234,7 @@ export default {
       "description": "A hard working Stone tool smith produces Stone tools to manufacture more complex goods.",
       "name": "Stone tool smith",
       "amount": 0,
-      "time": 0,
+      "time": 1,
       "progress": 0,
       "id": 5,
       "icon": ""
@@ -263,7 +263,7 @@ export default {
       "description": "A hard working Stone artisan produces Stone components for sale to other markets.",
       "name": "Stone artisan",
       "amount": 0,
-      "time": 0,
+      "time": 1,
       "progress": 0,
       "id": 6,
       "icon": ""
@@ -292,7 +292,7 @@ export default {
       "description": "A hard working Tin artisan produces Tin luxury to improve quality of life.",
       "name": "Tin artisan",
       "amount": 0,
-      "time": 0,
+      "time": 1,
       "progress": 0,
       "id": 7,
       "icon": ""
@@ -310,7 +310,7 @@ export default {
       "description": "A hard working Tin Mine produces Tin Ingot to be further refined and power the economy.",
       "name": "Tin Mine",
       "amount": 0,
-      "time": 0,
+      "time": 1,
       "progress": 0,
       "id": 8,
       "icon": ""
@@ -339,7 +339,7 @@ export default {
       "description": "A hard working Tin smith produces Tin ingot to build more complex goods and items.",
       "name": "Tin smith",
       "amount": 0,
-      "time": 0,
+      "time": 1,
       "progress": 0,
       "id": 9,
       "icon": ""
@@ -368,7 +368,7 @@ export default {
       "description": "A hard working Tin tool smith produces Tin tools to manufacture more complex goods.",
       "name": "Tin tool smith",
       "amount": 0,
-      "time": 0,
+      "time": 1,
       "progress": 0,
       "id": 10,
       "icon": ""
@@ -397,7 +397,7 @@ export default {
       "description": "A hard working Tin artisan produces Tin components for sale to other markets.",
       "name": "Tin artisan",
       "amount": 0,
-      "time": 0,
+      "time": 1,
       "progress": 0,
       "id": 11,
       "icon": ""

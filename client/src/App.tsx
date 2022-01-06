@@ -10,40 +10,10 @@ import storage from './route/storage';
 import production from './route/production';
 import StateControl from "./stateControl";
 import {
-  useQuery,
-  gql
+  useQuery
 } from "@apollo/client";
 import { useEffect, useState } from 'react';
-
-const query = gql`
-  query resources {
-    resources {
-      items {
-        storageCategory
-        description
-        name
-        id
-        icon
-      }
-      production {
-        consumption {
-          key
-          value
-        }
-        output {
-          key
-          value
-        }
-        description
-        name
-        time
-        progress
-        id
-        icon
-      }
-    }
-  }
-`;
+import { query } from './query/resources';
 
 interface IQuery {
   resources: {
@@ -68,6 +38,7 @@ export const App = () => {
         output: output.map((element: any) => [element.key as number, element.value as number]),
       }))));
       setReady(true);
+      control.start();
     }
   }, [loading, ready]);
   if (!ready) {
@@ -77,11 +48,11 @@ export const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element ={<Layout titleSetter={(title) => stateControl.setTitleSetter(title)}/>}>
-            <Route path="items" element={<Items control={control} setTitle={(title) => stateControl.titleSetter(title)}/>}/>
-            {storage(control, (title) => stateControl.titleSetter(title))}
-            {production(control, (title) => stateControl.titleSetter(title))}
-            <Route path="research" element={<Research setTitle={(title) => stateControl.titleSetter(title)}/>}/>
+          <Route path="/" element ={<Layout defaultTitle={() => stateControl.getTitle()} titleSetter={(title) => stateControl.setTitleSetter(title)}/>}>
+            <Route path="items" element={<Items control={control} setTitle={(title) => stateControl.getTitleSetter()(title)}/>}/>
+            {storage(control, (title) => stateControl.getTitleSetter()(title))}
+            {production(control, (title) => stateControl.getTitleSetter()(title))}
+            <Route path="research" element={<Research setTitle={(title) => stateControl.getTitleSetter()(title)}/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

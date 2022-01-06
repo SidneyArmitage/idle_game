@@ -9,6 +9,7 @@ interface IProps {
 
 export const Production = ({setTitle}: IProps) => {
   useEffect(() => {
+    console.log("setting title");
     setTitle("Production");
   }, []);
   return (

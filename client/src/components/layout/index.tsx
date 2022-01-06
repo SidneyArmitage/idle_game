@@ -4,11 +4,13 @@ import { Nav } from "../nav";
 
 interface ILayoutProps {
   titleSetter: (fn: (input: string) => void) => void;
+  defaultTitle: () => string;
 }
 
-export const Layout = ({ titleSetter }: ILayoutProps) => {
-  const [title, setTitle] = useState("");
+export const Layout = ({ titleSetter, defaultTitle }: ILayoutProps) => {
+  const [title, setTitle] = useState(defaultTitle());
   useEffect(()=> {
+    setTitle(defaultTitle);
     titleSetter((input: string) => {
       setTitle(input);
     });
