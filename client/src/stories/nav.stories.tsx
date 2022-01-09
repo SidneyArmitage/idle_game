@@ -10,12 +10,14 @@ export default {
 
 export const Nav = () => (
   <nav>
+    <div className="head"></div>
     <ul>
-      <li>Item A</li>
-      <li>Item B</li>
-      <li>Item C</li>
-      <li className="active-link">Selected</li>
-      <li>Item D</li>
+      <li className="link">Item A</li>
+      <li className="link">Item B</li>
+      <li className="link">Item C</li>
+      <li className="link active">Selected</li>
+      <li className="link">Item D</li>
     </ul>
+    <div className="tail"></div>
   </nav>
 );
