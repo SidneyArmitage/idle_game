@@ -51,7 +51,10 @@ export const getTime = (production: IProduction, modifiers: Modifiers, items: Re
   return strip(output);
 };
 
-export const tryStartProduction = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>, storage: Record<EStorageCategory, IStorage>): boolean => {
+export const tryStartProduction = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>, storage: Record<EStorageCategory, IStorage>, time: number): boolean => {
+  if (time === 0) {
+    return false;
+  }
   const consumption = getConsumption(production, modifiers, items);
   if (consumption.every(([id, count]) => (storage[items[id]?.storageCategory]?.stored[id] ?? Number.MIN_SAFE_INTEGER) >= count)) {
     consumption.forEach(([id, count]) => {
@@ -66,7 +69,7 @@ export const tryStartProduction = (production: IProduction, modifiers: Modifiers
 export const produce = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>, storage: Record<EStorageCategory, IStorage>, delta: number): void => {
   const time = getTime(production, modifiers, items);
   const initialProgress = production.progress;
-  if(initialProgress === 0 && !tryStartProduction(production, modifiers, items, storage)) {
+  if(initialProgress === 0 && !tryStartProduction(production, modifiers, items, storage, time)) {
     return;
   }
   production.progress = Math.min(initialProgress + delta, time);

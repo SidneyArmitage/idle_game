@@ -15,6 +15,7 @@ export const Detailed = ({control}: IProductionProps) => {
     setProducer(control.getProducer(numberId));
     const subscribable = control.getSubscribable(ESubscribables.PRODUCER);
     const subscription = subscribable.subscribe(() => {
+      console.log("producer changed");
       setProducer(control.getProducer(numberId));
     });
     return () => {

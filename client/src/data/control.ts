@@ -40,8 +40,7 @@ export class SimulationControl {
 
   step(delta: number) {
     const producers = this.getProducers();
-    console.log(producers);
-    // producers.map(producer => produce(producer, this.modifier, this.items.get(), this.storage, delta));
+    producers.map(producer => produce(producer, this.modifier, this.items.get(), this.storage, delta));
     this.producers.set(producers);
   }
 
@@ -103,11 +102,18 @@ export class SimulationControl {
   }
 
   start() {
+    let count = 10;
+    let last = 0;
     const animate = (time: number) => {
-      this.step(time / 1000);
-      // requestAnimationFrame(animate);
+      this.step((time - last) / 1000);
+      last = time;
+      if(count >= 0) {
+        console.log("animating", count);
+        count -= 1;
+        window.requestAnimationFrame(animate);
+      }
     }
-    requestAnimationFrame(animate);
+    window.requestAnimationFrame(animate);
   }
 
 };

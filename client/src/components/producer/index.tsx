@@ -18,7 +18,7 @@ export const Producer = ({isExpanded, description, name, id, progress, time, con
       </Link>
       <p>{description}</p>
       <p>
-        <Bar dataPoints={[progress, time - progress]} colours={[0x0000FF, 0xFFFFFF]} gap={0.1}/>
+        <Bar dataPoints={[progress, time - progress]} colours={[0x0000FF, 0x000099]} gap={0.1}/>
       </p>
       { isExpanded ?
       <>
