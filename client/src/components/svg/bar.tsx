@@ -7,7 +7,7 @@ interface IProps {
 }
 
 export default ({ dataPoints, gap = 0, colours = interpolate(dataPoints.length) }: IProps) => {
-  const scale = 100 / (dataPoints.reduce((acc, cur) => acc + cur + gap, 0) - gap);
+  const scale = (100 / (dataPoints.reduce((acc, cur) => acc + cur + gap, 0) - gap)) ?? 0;
   let current = 0;
   return (
     <svg viewBox="0 0 100 10" xmlns="http://www.w3.org/2000/svg">

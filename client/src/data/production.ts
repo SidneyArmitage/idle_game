@@ -7,11 +7,11 @@ import { IStorage, tryStore } from "./storage";
 const identityModifier = (base: number) => base;
 
 export const getConsumption = (production: IProduction, modifiers: Modifiers, items: Record<number, IItem>): [number, number][] => {
-  const focusedModifier = modifiers[EModifierType.FOCUSED][EModifierEffect.CONSUMPTION][production.id]?.value ?? identityModifier;
+  const focusedModifier = modifiers[EModifierEffect.CONSUMPTION][EModifierType.FOCUSED][production.id]?.value ?? identityModifier;
   return production.consumption.map((element) => {
     const item = items[element[0]];
-    const itemModifier = modifiers[EModifierType.CATEGORIES][EModifierEffect.CONSUMPTION][item?.storageCategory]?.value ?? identityModifier;
-    const goodsModifier = modifiers[EModifierType.GOODS][EModifierEffect.CONSUMPTION][item?.id]?.value ?? identityModifier;
+    const itemModifier = modifiers[EModifierEffect.CONSUMPTION][EModifierType.CATEGORIES][item?.storageCategory]?.value ?? identityModifier;
+    const goodsModifier = modifiers[EModifierEffect.CONSUMPTION][EModifierType.GOODS][item?.id]?.value ?? identityModifier;
     return [element[0], goodsModifier(focusedModifier(itemModifier(element[1]))) * production.amount];
   });
 };

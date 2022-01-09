@@ -21,7 +21,6 @@ export class SimulationControl {
   private purchasedResearch: number[]; // resets
   private unlockedResearch: number[]; // changes
   private unlockableResearch: number[]; // changes
-  private previousFrame: number;
 
   constructor ({storage, modifier, purchasedResearch} = reset()){
     this.research = {};
@@ -32,7 +31,6 @@ export class SimulationControl {
     this.producers = new Subscribable({});
     this.modifier = modifier;
     this.purchasedResearch = purchasedResearch;
-    this.previousFrame = Date.now();
   }
 
   init(items: Record<number, IItem>, production: Record<number, IProduction>) {
@@ -42,7 +40,8 @@ export class SimulationControl {
 
   step(delta: number) {
     const producers = this.getProducers();
-    producers.map(producer => produce(producer, this.modifier, this.items.get(), this.storage, delta));
+    console.log(producers);
+    // producers.map(producer => produce(producer, this.modifier, this.items.get(), this.storage, delta));
     this.producers.set(producers);
   }
 
@@ -105,9 +104,8 @@ export class SimulationControl {
 
   start() {
     const animate = (time: number) => {
-      this.step(this.previousFrame - time);
-      this.previousFrame = time;
-      requestAnimationFrame(animate);
+      this.step(time / 1000);
+      // requestAnimationFrame(animate);
     }
     requestAnimationFrame(animate);
   }

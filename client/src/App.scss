@@ -98,11 +98,11 @@ nav {
   .tail {
     height: 100%;
     box-shadow: 
-      0.5rem 0rem var(--shadow-step-0),
-      0.5rem 0rem var(--shadow-step-1),
-      0.5rem 0rem var(--shadow-step-2),
-      0.5rem 0rem var(--shadow-step-3),
-      0.5rem 0rem var(--shadow-step-4);
+      0.5rem 0.5rem var(--shadow-step-0),
+      0.5rem 0.5rem var(--shadow-step-1),
+      0.5rem 0.5rem var(--shadow-step-2),
+      0.5rem 0.5rem var(--shadow-step-3),
+      0.5rem 0.5rem var(--shadow-step-4);
       grid-row: 3 / 4;
   }
 
@@ -128,7 +128,7 @@ nav {
       text-align: center;
 
       &:last-of-type {
-        clip-path: inset(-1rem -1rem 0% -1rem);
+        clip-path: polygon(115% 0px, 115% 130.0%, 100% 130.0%, 100% 98%, 0px 98%, 0px 0px);
       }
 
 

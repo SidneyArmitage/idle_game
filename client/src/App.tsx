@@ -22,6 +22,10 @@ interface IQuery {
   };
 };
 
+const transformTuple = (element: any): [number, number] => {
+  return [element.key as number, element.value as number];
+}
+
 export const App = () => {
   const control = new SimulationControl();
   const stateControl = new StateControl();
@@ -34,8 +38,8 @@ export const App = () => {
       }
       control.init(arrayToMap(data?.resources.items), arrayToMap(data?.resources.production.map(({consumption, output, ...rest}) => ({
         ...rest,
-        consumption: consumption.map((element: any) => [element.key as number, element.value as number]),
-        output: output.map((element: any) => [element.key as number, element.value as number]),
+        consumption: consumption.map(transformTuple),
+        output: output.map(transformTuple),
       }))));
       setReady(true);
       control.start();

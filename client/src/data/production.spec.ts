@@ -104,7 +104,7 @@ describe("get consumption", () => {
 
     it("has no units (amount is 0)", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.CATEGORIES][EModifierEffect.CONSUMPTION][EStorageCategory.BULK] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.CATEGORIES][EStorageCategory.BULK] = {
         ...fillObject(),
         value: (base: number) => base + 10,
       };
@@ -129,7 +129,7 @@ describe("get consumption", () => {
 
     it("has no inputs", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.CATEGORIES][EModifierEffect.CONSUMPTION][EStorageCategory.BULK] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.CATEGORIES][EStorageCategory.BULK] = {
         ...fillObject(),
         value: (base: number) => base + 10,
       };
@@ -154,7 +154,7 @@ describe("get consumption", () => {
 
     it("has one input", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.CATEGORIES][EModifierEffect.CONSUMPTION][EStorageCategory.BULK] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.CATEGORIES][EStorageCategory.BULK] = {
         ...fillObject(),
         value: (base: number) => base + 10,
       };
@@ -179,11 +179,11 @@ describe("get consumption", () => {
 
     it("has 2 inputs", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.CATEGORIES][EModifierEffect.CONSUMPTION][EStorageCategory.BULK] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.CATEGORIES][EStorageCategory.BULK] = {
         ...fillObject(),
         value: (base: number) => base * 2,
       };
-      modifiers[EModifierType.CATEGORIES][EModifierEffect.CONSUMPTION][EStorageCategory.MANUFACTURED] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.CATEGORIES][EStorageCategory.MANUFACTURED] = {
         ...fillObject(),
         value: (base: number) => base * 3,
       };
@@ -217,7 +217,7 @@ describe("get consumption", () => {
 
     it("has no units (amount is 0)", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.FOCUSED][EModifierEffect.CONSUMPTION][0] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.FOCUSED][0] = {
         ...fillObject(),
         value: (base: number) => base + 10,
       };
@@ -242,7 +242,7 @@ describe("get consumption", () => {
 
     it("has no inputs", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.FOCUSED][EModifierEffect.CONSUMPTION][0] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.FOCUSED][0] = {
         ...fillObject(),
         value: (base: number) => base + 10,
       };
@@ -267,7 +267,7 @@ describe("get consumption", () => {
 
     it("has one input", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.FOCUSED][EModifierEffect.CONSUMPTION][0] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.FOCUSED][0] = {
         ...fillObject(),
         value: (base: number) => base + 10,
       };
@@ -292,7 +292,7 @@ describe("get consumption", () => {
 
     it("has 2 inputs", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.FOCUSED][EModifierEffect.CONSUMPTION][0] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.FOCUSED][0] = {
         ...fillObject(),
         value: (base: number) => base * 2,
       };
@@ -322,11 +322,11 @@ describe("get consumption", () => {
     
     it("has focused and category", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.FOCUSED][EModifierEffect.CONSUMPTION][0] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.FOCUSED][0] = {
         ...fillObject(),
         value: (base: number) => base + 10,
       };
-      modifiers[EModifierType.CATEGORIES][EModifierEffect.CONSUMPTION][EStorageCategory.BULK] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.CATEGORIES][EStorageCategory.BULK] = {
         ...fillObject(),
         value: (base: number) => base * 2,
       };
@@ -351,11 +351,11 @@ describe("get consumption", () => {
 
     it("has focused and goods", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.FOCUSED][EModifierEffect.CONSUMPTION][0] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.FOCUSED][0] = {
         ...fillObject(),
         value: (base: number) => base + 10,
       };
-      modifiers[EModifierType.GOODS][EModifierEffect.CONSUMPTION][1] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.GOODS][1] = {
         ...fillObject(),
         value: (base: number) => base * 2,
       };
@@ -384,7 +384,7 @@ describe("get consumption", () => {
 
     it("has no units (amount is 0)", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.GOODS][EModifierEffect.CONSUMPTION][1] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.GOODS][1] = {
         ...fillObject(),
         value: (base: number) => base + 10,
       };
@@ -409,7 +409,7 @@ describe("get consumption", () => {
 
     it("has no inputs", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.GOODS][EModifierEffect.CONSUMPTION][1] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.GOODS][1] = {
         ...fillObject(),
         value: (base: number) => base + 10,
       };
@@ -434,7 +434,7 @@ describe("get consumption", () => {
 
     it("has one input", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.GOODS][EModifierEffect.CONSUMPTION][1] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.GOODS][1] = {
         ...fillObject(),
         value: (base: number) => base + 10,
       };
@@ -459,11 +459,11 @@ describe("get consumption", () => {
 
     it("has 2 inputs", () => {
       const modifiers = initModifiers();
-      modifiers[EModifierType.GOODS][EModifierEffect.CONSUMPTION][1] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.GOODS][1] = {
         ...fillObject(),
         value: (base: number) => base * 2,
       };
-      modifiers[EModifierType.GOODS][EModifierEffect.CONSUMPTION][2] = {
+      modifiers[EModifierEffect.CONSUMPTION][EModifierType.GOODS][2] = {
         ...fillObject(),
         value: (base: number) => base * 3,
       };

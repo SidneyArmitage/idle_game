@@ -25,6 +25,7 @@ query resources {
       progress
       id
       icon
+      amount
     }
   }
 }
