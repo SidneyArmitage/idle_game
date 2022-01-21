@@ -14,6 +14,7 @@ import {
 } from "@apollo/client";
 import { useEffect, useState } from 'react';
 import { query } from './query/resources';
+import { Bindings } from './dev/bindings';
 
 interface IQuery {
   resources: {
@@ -22,6 +23,11 @@ interface IQuery {
   };
 };
 
+declare global {
+  interface Window { bindings: Bindings; }
+}
+
+
 const transformTuple = (element: any): [number, number] => {
   return [element.key as number, element.value as number];
 }
@@ -29,6 +35,7 @@ const transformTuple = (element: any): [number, number] => {
 export const App = () => {
   const control = new SimulationControl();
   const stateControl = new StateControl();
+  window.bindings = new Bindings(control);
   const { loading, data } = useQuery<IQuery>(query);
   const [ ready, setReady ] = useState(false);
   useEffect(() => {

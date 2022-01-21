@@ -21,6 +21,8 @@ export class SimulationControl {
   private purchasedResearch: number[]; // resets
   private unlockedResearch: number[]; // changes
   private unlockableResearch: number[]; // changes
+  private isRunning: boolean;
+  private last: number;
 
   constructor ({storage, modifier, purchasedResearch} = reset()){
     this.research = {};
@@ -31,6 +33,8 @@ export class SimulationControl {
     this.producers = new Subscribable({});
     this.modifier = modifier;
     this.purchasedResearch = purchasedResearch;
+    this.isRunning = false;
+    this.last = 0;
   }
 
   init(items: Record<number, IItem>, production: Record<number, IProduction>) {
@@ -102,18 +106,28 @@ export class SimulationControl {
   }
 
   start() {
-    let count = 10;
-    let last = 0;
+    this.last = 0;
+    this.isRunning = true;
     const animate = (time: number) => {
-      this.step((time - last) / 1000);
-      last = time;
-      if(count >= 0) {
-        console.log("animating", count);
-        count -= 1;
+      this.step((time - this.last) / 1000);
+      this.last = time;
+      if (this.isRunning === true) {
         window.requestAnimationFrame(animate);
       }
     }
     window.requestAnimationFrame(animate);
+  }
+
+  stop() {
+    this.isRunning = false;
+  }
+
+  getIsRunning() {
+    return this.isRunning;
+  }
+
+  getLast() {
+    return this.last;
   }
 
 };

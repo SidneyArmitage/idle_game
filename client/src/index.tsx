@@ -6,7 +6,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 if (process.env.NODE_ENV === 'development') {
 
-  const { worker } = require('./mocks/browser');
+  const { worker } = require('./dev/mocks/browser');
 
   worker.start();
 
