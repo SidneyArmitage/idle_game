@@ -4,17 +4,16 @@ import './App.scss';
 import { Layout } from './components/layout';
 import { Items } from './components/pages/items';
 import { Research } from './components/pages/research';
-import { SimulationControl } from './data/control';
 import { arrayToMap } from './util/arrayToMap';
 import storage from './route/storage';
 import production from './route/production';
-import StateControl from "./stateControl";
 import {
   useQuery
 } from "@apollo/client";
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { query } from './query/resources';
 import { Bindings } from './dev/bindings';
+import { dataContext, stateContext } from './context';
 
 interface IQuery {
   resources: {
@@ -32,9 +31,10 @@ const transformTuple = (element: any): [number, number] => {
   return [element.key as number, element.value as number];
 }
 
+
 export const App = () => {
-  const control = new SimulationControl();
-  const stateControl = new StateControl();
+  const control = useContext(dataContext);
+  const stateControl = useContext(stateContext);
   window.bindings = new Bindings(control);
   const { loading, data } = useQuery<IQuery>(query);
   const [ ready, setReady ] = useState(false);
