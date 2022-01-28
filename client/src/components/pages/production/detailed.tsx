@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { ESubscribables, SimulationControl } from "../../../data/control";
+import { dataContext } from "../../../context";
+import { ESubscribables } from "../../../data/control";
 import { Producer } from "../../producer";
 
 interface IProductionProps {
-  control: SimulationControl;
 }
 
-export const Detailed = ({control}: IProductionProps) => {
+export const Detailed = ({}: IProductionProps) => {
+  const control = useContext(dataContext);
   const { id } = useParams();
   const numberId = Number.parseInt(id || "");
   const [producer, setProducer] = useState(control.getProducer(numberId));
@@ -27,7 +28,7 @@ export const Detailed = ({control}: IProductionProps) => {
   }
   return (
     <>
-      <Producer isExpanded={true} control={control} {...producer}/>
+      <Producer isExpanded={true} {...producer}/>
     </>
   );
 };

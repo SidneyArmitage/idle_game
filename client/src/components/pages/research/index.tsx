@@ -1,13 +1,15 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { stateContext } from "../../../context";
 
 interface IProps {
-  setTitle: (title: string) => void;
+
 }
 
 
-export const Research = ({setTitle}: IProps) => {
+export const Research = ({}: IProps) => {
+  const stateControl = useContext(stateContext);
   useEffect(() => {
-    setTitle("Research");
+    stateControl.getTitleSetter()("Research");
   }, []);
   return (
     <>

@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { SimulationControl } from "../../data/control";
+import { useContext, useState } from "react";
 import { IProduction } from "shared";
 import { Item } from "../item";
 import { Link } from "react-router-dom";
 import Bar from "../svg/bar";
+import { dataContext } from "../../context";
 
 interface IItemProps extends IProduction {
-  control: SimulationControl;
   isExpanded: boolean;
 }
 
-export const Producer = ({isExpanded, description, name, id, progress, time, control, consumption, output}: IItemProps) => {
+export const Producer = ({isExpanded, description, name, id, progress, time, consumption, output}: IItemProps) => {
+  const control = useContext(dataContext);
   return (
     <div>
       <Link to={isExpanded ? '..' : `./${id}`}>

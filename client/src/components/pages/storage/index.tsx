@@ -1,15 +1,17 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { stateContext } from "../../../context";
 export { Detailed } from "./detailed";
 export { Summary } from "./summary";
 
 interface IProps {
-  setTitle: (title: string) => void;
+
 }
 
-export const Storage = ({setTitle}: IProps) => {
+export const Storage = ({}: IProps) => {
+  const stateControl = useContext(stateContext);
   useEffect(() => {
-    setTitle("Storage");
+    stateControl.getTitleSetter()("Storage");
   }, []);
   return (
     <>

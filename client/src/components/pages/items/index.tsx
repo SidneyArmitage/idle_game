@@ -1,17 +1,19 @@
-import { ESubscribables, SimulationControl } from "../../../data/control";
-import { EStorageCategory, IGetItem } from "shared";
+import { ESubscribables } from "../../../data/control";
+import { EStorageCategory } from "shared";
 import { Item } from "../../item";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { dataContext, stateContext } from "../../../context";
 
 interface IProps {
-  control: SimulationControl;
-  setTitle: (title: string) => void;
+  
 }
 
-export const Items = ({control, setTitle}: IProps) => {
+export const Items = ({}: IProps) => {
+  const stateControl = useContext(stateContext);
+  const control = useContext(dataContext);
   const [items, setItems] = useState(control.getItems(true, EStorageCategory.BULK | EStorageCategory.MANUFACTURED | EStorageCategory.EXOTIC));
   useEffect(() => {
-    setTitle("Items");
+    stateControl.getTitleSetter()("Items");
     setItems(control.getItems(true, EStorageCategory.BULK | EStorageCategory.MANUFACTURED | EStorageCategory.EXOTIC));
     const subscribable = control.getSubscribable(ESubscribables.ITEM);
     const subscription = subscribable.subscribe(() => {

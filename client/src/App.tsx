@@ -59,11 +59,11 @@ export const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element ={<Layout defaultTitle={() => stateControl.getTitle()} titleSetter={(title) => stateControl.setTitleSetter(title)}/>}>
-            <Route path="items" element={<Items control={control} setTitle={(title) => stateControl.getTitleSetter()(title)}/>}/>
-            {storage(control, (title) => stateControl.getTitleSetter()(title))}
-            {production(control, (title) => stateControl.getTitleSetter()(title))}
-            <Route path="research" element={<Research setTitle={(title) => stateControl.getTitleSetter()(title)}/>}/>
+          <Route path="/" element ={<Layout />}>
+            <Route path="items" element={<Items /> }/>
+            {storage()}
+            {production()}
+            <Route path="research" element={<Research />}/>
           </Route>
         </Routes>
       </BrowserRouter>

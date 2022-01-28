@@ -3,11 +3,11 @@ import { Production, Summary, Detailed } from '../components/pages/production';
 import { Route } from "react-router-dom";
 import { Fragment } from "react";
 
-export default (control: SimulationControl, setTitle: (title: string) => void) => (
+export default () => (
   <Fragment>
-    <Route path="production" element={<Production setTitle={setTitle}/>}>
-      <Route path="" element={<Summary control={control}/>}/>
-      <Route path=":id" element={<Detailed control={control}/>}/>
+    <Route path="production" element={<Production />}>
+      <Route path="" element={<Summary />}/>
+      <Route path=":id" element={<Detailed />}/>
     </Route>
   </Fragment>
 );

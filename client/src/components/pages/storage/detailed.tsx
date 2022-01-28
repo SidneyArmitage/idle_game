@@ -1,14 +1,15 @@
+import { useContext } from "react";
 import { EStorageCategory } from "shared";
-import { SimulationControl } from "../../../data/control";
+import { dataContext } from "../../../context";
 import { getFree } from "../../../data/storage";
 import { Item } from "../../item";
 
 interface IProps {
-  control: SimulationControl;
   id: EStorageCategory;
 }
 
-export const Detailed = ({control, id}: IProps) => {
+export const Detailed = ({id}: IProps) => {
+  const control = useContext(dataContext);
   const store = control.getStore(id);
   const free = getFree(store);
   // @ts-ignore
