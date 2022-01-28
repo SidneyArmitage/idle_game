@@ -44,7 +44,9 @@ export class SimulationControl {
 
   step(delta: number) {
     const producers = this.getProducers();
-    producers.map(producer => produce(producer, this.modifier, this.items.get(), this.storage, delta));
+    const items = this.items.get();
+    producers.map(producer => produce(producer, this.modifier, items, this.storage, delta));
+    this.items.set(items);
     this.producers.set(producers);
   }
 
