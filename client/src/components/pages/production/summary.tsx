@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { dataContext } from "../../../context";
 import { ESubscribables } from "../../../data/control";
-import { Producer } from "../../producer";
+import { Summary as Producer } from "../../producer";
 
 interface IProductionProps {
 }
@@ -21,7 +21,7 @@ export const Summary = ({}: IProductionProps) => {
   }, []);
   return (
     <>
-      {producers.map((production) => (<Producer isExpanded={false} key={production.id} {...production}/>))}
+      {producers.map((production) => (<Producer key={production.id} {...production}/>))}
     </>
   );
 };

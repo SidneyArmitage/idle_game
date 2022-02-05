@@ -13,7 +13,7 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import { query } from './query/resources';
 import { Bindings } from './dev/bindings';
-import { dataContext, stateContext } from './context';
+import { dataContext } from './context';
 
 interface IQuery {
   resources: {
@@ -34,7 +34,6 @@ const transformTuple = (element: any): [number, number] => {
 
 export const App = () => {
   const control = useContext(dataContext);
-  const stateControl = useContext(stateContext);
   window.bindings = new Bindings(control);
   const { loading, data } = useQuery<IQuery>(query);
   const [ ready, setReady ] = useState(false);

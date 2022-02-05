@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { dataContext } from "../../../context";
 import { ESubscribables } from "../../../data/control";
-import { Producer } from "../../producer";
+import { Expanded } from "../../producer";
 
 interface IProductionProps {
 }
@@ -28,7 +28,7 @@ export const Detailed = ({}: IProductionProps) => {
   }
   return (
     <>
-      <Producer isExpanded={true} {...producer}/>
+      <Expanded {...producer}/>
     </>
   );
 };

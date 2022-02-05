@@ -1,7 +1,7 @@
 import "./index.scss";
 
 interface IProps {
-  title: string;
+  title: React.ReactNode;
   icon: string;
   children: React.ReactNode;
 }
