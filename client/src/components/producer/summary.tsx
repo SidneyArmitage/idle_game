@@ -3,9 +3,9 @@ import { IProduction } from "shared";
 import Card from "../card";
 import Bar from "../svg/bar";
 
-const Production = ({id, name, description, progress, time}: IProduction) => {
+const Production = ({id, name, description, progress, time, icon}: IProduction) => {
   return (
-    <Card title={<Link to={`./${id}`}>{name}</Link>} icon={""}>
+    <Card title={<Link to={`./${id}`}>{name}</Link>} icon={icon}>
       <>
         <p>{description}</p>
         <p>
