@@ -1,3 +1,5 @@
+@import "./style/layers.scss";
+
 :root {
   --shadow-none: 0rem hsl(0deg 0% 50% / 0.2);
   --shadow-step-0: 0.05rem hsl(0deg 0% 50% / 0.2);
@@ -86,7 +88,6 @@ nav {
   height: 100vh;
   display: grid;
   grid-template-rows: 0rem auto 1fr;
-  background-color: white;
 
   .head {
     margin-top: -1.5rem;
@@ -128,7 +129,6 @@ nav {
         0.5rem 0.5rem var(--shadow-step-2),
         0.5rem 0.5rem var(--shadow-step-3),
         0.5rem 0.5rem var(--shadow-step-4);
-      background-color: white;
       padding: 0.8rem;
       text-align: center;
 

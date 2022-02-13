@@ -1,0 +1,27 @@
+$layers: 4;
+$layer-step: 2%;
+
+
+
+@mixin generateLayers($value) {
+  .layer {
+    --layer: calc(#{$layer-step} * (#{$layers} - #{$value}));
+
+    @if $value > 0 {
+      @include generateLayers($value - 1);
+    }
+  }
+  button.layer {
+
+    &:focus, &:hover {
+      --layer: calc(#{$layer-step} * (#{$layers} - #{$value} - 1));
+    }
+
+  }
+}
+
+.layer {
+  background-color: hsl(0, 0%, calc((100% - #{$layer-step} * #{$layers}) + var(--layer)));
+}
+
+@include generateLayers($layers);
