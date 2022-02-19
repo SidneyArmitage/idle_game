@@ -6,10 +6,10 @@ export const Nav = () => {
   <nav>
   <div className="head"></div>
     <ul>
-      <li className={`link ${useMatch({path: "items"}) ? "active" : "layer"}`}><Link to="items/">Items</Link></li>
-      <li className={`link ${useMatch({path: "production"}) ? "active" : "layer"}`}><Link to="production/">Production</Link></li>
-      <li className={`link ${useMatch({path: "research"}) ? "active" : "layer"}`}><Link to="research/">Research</Link></li>
-      <li className={`link ${useMatch({path: "storage"}) ? "active" : "layer"}`}><Link to="storage/">Storage</Link></li>
+      <li className={`link ${useMatch({path: "items"}) ? "active" : "button layer"}`}><Link to="items/">Items</Link></li>
+      <li className={`link ${useMatch({path: "production"}) ? "active" : "button layer"}`}><Link to="production/">Production</Link></li>
+      <li className={`link ${useMatch({path: "research"}) ? "active" : "button layer"}`}><Link to="research/">Research</Link></li>
+      <li className={`link ${useMatch({path: "storage"}) ? "active" : "button layer"}`}><Link to="storage/">Storage</Link></li>
     </ul>
     <div className="tail layer"></div>
   </nav>

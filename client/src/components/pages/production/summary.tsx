@@ -1,15 +1,14 @@
 import { useState, useEffect, useContext } from "react";
-import { dataContext } from "../../../context";
+import { dataContext, stateContext } from "../../../context";
 import { ESubscribables } from "../../../data/control";
 import { Summary as Producer } from "../../producer";
 
-interface IProductionProps {
-}
-
-export const Summary = ({}: IProductionProps) => {
+export const Summary = () => {
   const control = useContext(dataContext);
+  const stateControl = useContext(stateContext);
   const [producers, setProducers] = useState(control.getProducers());
   useEffect(()=> {
+    stateControl.getTitleSetter()("Production");
     setProducers(control.getProducers());
     const subscribable = control.getSubscribable(ESubscribables.PRODUCER);
     const subscription = subscribable.subscribe(() => {
@@ -18,7 +17,7 @@ export const Summary = ({}: IProductionProps) => {
     return () => {
       subscribable.unsubscribe(subscription);
     }
-  }, []);
+  }, [control, stateControl]);
   return (
     <>
       {producers.map((production) => (<Producer key={production.id} {...production}/>))}

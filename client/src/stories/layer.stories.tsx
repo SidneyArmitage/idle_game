@@ -24,8 +24,8 @@ export const MultiTemplate = () => (
   <div className="layer">
     <TestElementSingle depth={3}/>
   <div className="layer">
-    <button className="layer"></button>
+    <button className="button layer"></button>
   </div>
-    <button className="layer"></button>
+    <button className="button layer"></button>
   </div>
 );

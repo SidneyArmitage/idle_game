@@ -1,21 +1,18 @@
-import { useContext, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { stateContext } from "../../context";
 import { Nav } from "../nav";
 
-interface ILayoutProps {
 
-}
-
-export const Layout = ({  }: ILayoutProps) => {
+export const Layout = () => {
   const stateControl = useContext(stateContext);
   const [title, setTitle] = useState(stateControl.getTitle());
   useEffect(()=> {
     setTitle(stateControl.getTitle());
-    stateControl.setTitleSetter((input: string) => {
+    stateControl.setTitleSetter((input: ReactNode) => {
       setTitle(input);
     });
-  }, []);
+  }, [stateControl]);
   return (
     <>
     <header>

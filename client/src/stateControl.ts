@@ -1,17 +1,19 @@
-export default class {
-  private titleSetter: (input: string) => void;
-  private title: string;
+import { ReactNode } from "react";
+
+export default class StateControl {
+  private titleSetter: (input: ReactNode) => void;
+  private title: ReactNode;
   constructor() {
     this.titleSetter = () => {};
     this.title = "";
   }
 
-  setTitleSetter(fn: (input: string) => void) {
+  setTitleSetter(fn: (input: ReactNode) => void) {
     this.titleSetter = fn;
   }
 
   getTitleSetter() {
-    return (title: string) => {
+    return (title: ReactNode) => {
       this.titleSetter(title);
       this.title = title;
     };

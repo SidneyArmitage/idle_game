@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Card from "../card";
 
 interface IStoreProps {
   id: number;
@@ -10,12 +11,11 @@ interface IStoreProps {
 
 export const Store = ({id, name, description, used, available}: IStoreProps) => {
   return (
-    <div>
-      <Link to={`./${id}`}><h2>{name}</h2></Link>
+    <Card title={<Link to={`./${id}`}>{name}</Link>} icon={""}>
       <p>{description}</p>
       <p>
         <span>{used}</span> / <span>{available}</span>
       </p>
-    </div>
+    </Card>
   );
 };

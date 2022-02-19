@@ -11,7 +11,7 @@ $layer-step: 2%;
       @include generateLayers($value - 1);
     }
   }
-  button.layer {
+  .button.layer {
 
     &:focus, &:hover {
       --layer: calc(#{$layer-step} * (#{$layers} - #{$value} - 1));

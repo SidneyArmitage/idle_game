@@ -1,13 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { dataContext } from "../../../context";
+import { dataContext, stateContext } from "../../../context";
 import { ESubscribables } from "../../../data/control";
 import { Expanded } from "../../producer";
 
-interface IProductionProps {
-}
 
-export const Detailed = ({}: IProductionProps) => {
+export const Detailed = () => {
+  const stateControl = useContext(stateContext);
   const control = useContext(dataContext);
   const { id } = useParams();
   const numberId = Number.parseInt(id || "");
@@ -17,12 +16,14 @@ export const Detailed = ({}: IProductionProps) => {
     const subscribable = control.getSubscribable(ESubscribables.PRODUCER);
     const subscription = subscribable.subscribe(() => {
       console.log("producer changed");
-      setProducer(control.getProducer(numberId));
+      const p = control.getProducer(numberId)
+      stateControl.getTitleSetter()(p.name);
+      setProducer(p);
     });
     return () => {
       subscribable.unsubscribe(subscription);
     }
-  }, []);
+  }, [control, stateControl, numberId]);
   if (producer === undefined) {
     return <>loading...</>;
   }
