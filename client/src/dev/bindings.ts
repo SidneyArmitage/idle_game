@@ -1,3 +1,4 @@
+import { EStorageCategory } from "shared";
 import { SimulationControl } from "../data/control";
 
 export class Bindings {
@@ -25,6 +26,17 @@ export class Bindings {
 
   setDistance(distance: number) {
     this.stepDistance = distance;
+  }
+
+  dump() {
+    console.log("storage");
+    console.dir({
+      [EStorageCategory.BULK]: this.control.getStore(EStorageCategory.BULK),
+      [EStorageCategory.EXOTIC]: this.control.getStore(EStorageCategory.EXOTIC),
+      [EStorageCategory.MANUFACTURED]: this.control.getStore(EStorageCategory.MANUFACTURED),
+    });
+    console.log("producers");
+    console.dir(this.control.getProducers());
   }
 
 }
