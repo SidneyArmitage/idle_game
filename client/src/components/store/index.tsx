@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Card from "../card";
 
-interface IStoreProps {
+export interface IStoreProps {
   id: number;
   name: string;
   description: string;

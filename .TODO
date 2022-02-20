@@ -1,7 +1,10 @@
 tests:
   ✔ Multiple production scenario e.g. focused, goods @done(21-11-28 08:15)
   ✔ Multiple production scenario e.g. focused, goods and Categories @done(21-11-28 08:15)
-☐ implement: https://www.joshwcomeau.com/css/custom-css-reset/
+✔ implement: https://www.joshwcomeau.com/css/custom-css-reset/ @done(22-02-20 10:11)
 ☐ for produce, on overflow 'sell'
 ☐ reset production progress on restart
-☐ update realtime for producer
+✔ update realtime for producer @done(22-02-20 10:11)
+Investigate:
+  ✔ should item be a subscribable, should we even be updating? @done(22-02-20 11:05)
+  ☐ fix why we only create upto free

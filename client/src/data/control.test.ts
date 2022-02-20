@@ -134,6 +134,92 @@ describe("SimulationControl class", () => {
       const control = new SimulationControl();
       control.init({
         0: {
+          description: "Straight from the tree",
+          name: "Log",
+          id: 0,
+          icon: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+        1: {
+          description: "The basic heavy building material",
+          name: "Stone",
+          id: 1,
+          icon: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+        2: {
+          description: "Raw food, fresh from the fields",
+          name: "Wheat",
+          id: 2,
+          icon: "",
+          storageCategory: EStorageCategory.BULK,
+        },
+        3: {
+          description: "They are the core of production",
+          name: "Population",
+          id: 3,
+          icon: "",
+          storageCategory: EStorageCategory.POPULATION,
+        },
+      }, {});
+      expect(control.getItems(true, EStorageCategory.POPULATION)).toStrictEqual([{
+        description: "They are the core of production",
+        name: "Population",
+        id: 3,
+        icon: "",
+        storageCategory: EStorageCategory.POPULATION,
+        current: 0,
+      }]);
+    });
+  });
+
+describe("getItem", () => {
+  
+  it("gets the items from one category", () => {
+    const control = new SimulationControl();
+    control.init({
+      0: {
+      description: "Straight from the tree",
+      name: "Log",
+      id: 0,
+      icon: "",
+      storageCategory: EStorageCategory.BULK,
+    },
+    1: {
+      description: "The basic heavy building material",
+      name: "Stone",
+      id: 1,
+      icon: "",
+      storageCategory: EStorageCategory.BULK,
+    },
+    2: {
+      description: "Raw food, fresh from the fields",
+      name: "Wheat",
+      id: 2,
+      icon: "",
+      storageCategory: EStorageCategory.BULK,
+    },
+    3: {
+      description: "They are the core of production",
+      name: "Population",
+      id: 3,
+      icon: "",
+      storageCategory: EStorageCategory.POPULATION,
+    },
+  }, {});
+    expect(control.getItem(3, false)).toStrictEqual({
+      description: "They are the core of production",
+      name: "Population",
+      id: 3,
+      icon: "",
+      storageCategory: EStorageCategory.POPULATION,
+    });
+  });
+
+  it("returns with amount when required", () => {
+    const control = new SimulationControl();
+    control.init({
+      0: {
         description: "Straight from the tree",
         name: "Log",
         id: 0,
@@ -162,16 +248,17 @@ describe("SimulationControl class", () => {
         storageCategory: EStorageCategory.POPULATION,
       },
     }, {});
-    expect(control.getItems(true, EStorageCategory.POPULATION)).toStrictEqual([{
+    expect(control.getItem(3, true)).toStrictEqual({
       description: "They are the core of production",
       name: "Population",
       id: 3,
       icon: "",
       storageCategory: EStorageCategory.POPULATION,
       current: 0,
-    }]);
     });
   });
+
+});
 
   describe("start", () => {
     let spied: jest.MockInstance<number, [callback: FrameRequestCallback]>;

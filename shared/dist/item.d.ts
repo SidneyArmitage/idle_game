@@ -5,5 +5,5 @@ export interface IItem extends IObject {
 }
 export interface IGetItem extends IItem {
     current: number;
-    max: number | undefined;
+    max?: number;
 }

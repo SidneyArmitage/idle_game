@@ -5,5 +5,5 @@ export interface IObject {
     description: string;
     name: string;
     id: number;
-    icon: "";
+    icon: string;
 }

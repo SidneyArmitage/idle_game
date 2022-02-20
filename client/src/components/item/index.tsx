@@ -9,6 +9,7 @@ interface IItemProps {
 }
 
 export const Item = ({name, description, current, max, icon}: IItemProps) => {
+  console.log(max);
   return (
     <Card title={name} icon={icon}>
       <>

@@ -1,18 +1,28 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { EStorageCategory } from "shared";
 import { dataContext } from "../../../context";
-import { Store } from "../../store";
+import { ESubscribables } from "../../../data/control";
+import { IStoreProps, Store } from "../../store";
 
-interface IProps {
-}
 
-export const Summary = ({}: IProps) => {
+export const Summary = () => {
   const control = useContext(dataContext);
+  const [stores, setStores] = useState([] as IStoreProps[]);
+  useEffect(() => {
+    const subscribable = control.getSubscribable(ESubscribables.STORE);
+    const subscription = subscribable.subscribe(() => 
+    setStores([
+      control.getStore(EStorageCategory.BULK),
+      control.getStore(EStorageCategory.MANUFACTURED),
+      control.getStore(EStorageCategory.EXOTIC),
+    ]));
+    return () => {
+      subscribable.unsubscribe(subscription);
+    };
+  }, [control]);
   return (
     <>
-      <Store {...control.getStore(EStorageCategory.BULK)}/>
-      <Store {...control.getStore(EStorageCategory.MANUFACTURED)}/>
-      <Store {...control.getStore(EStorageCategory.EXOTIC)}/>
+    {stores.map((store, index) => <Store key={index} {...store}/>)}
     </>
   );
 };

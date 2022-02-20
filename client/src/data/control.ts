@@ -7,13 +7,13 @@ import { IResearch } from "./research";
 import { getFree, IStorage } from "./storage";
 
 export enum ESubscribables {
-  ITEM,
   PRODUCER,
+  STORE,
 }
 
 export class SimulationControl {
-  private items: Subscribable<Record<number, IItem>>; // static
-  private storage: Record<EStorageCategory, IStorage>; // resets
+  private items: Record<number, IItem>; // static
+  private storage: Subscribable<Record<EStorageCategory, IStorage>>; // resets
   private producers: Subscribable<Record<number, IProduction>>; // changes (resets a bit)
   // modifier is stored by type, what item it affects which is defined by type and then what effect it has
   private modifier: Modifiers; // resets
@@ -28,8 +28,8 @@ export class SimulationControl {
     this.research = {};
     this.unlockedResearch = [];
     this.unlockableResearch = [];
-    this.storage = storage;
-    this.items = new Subscribable({});
+    this.storage = new Subscribable(storage);
+    this.items = {};
     this.producers = new Subscribable({});
     this.modifier = modifier;
     this.purchasedResearch = purchasedResearch;
@@ -38,24 +38,24 @@ export class SimulationControl {
   }
 
   init(items: Record<number, IItem>, production: Record<number, IProduction>) {
-    this.items.set(items);
+    this.items = items;
     this.producers.set(production);
   }
 
   step(delta: number) {
     const producers = this.getProducers();
-    const items = this.items.get();
-    producers.map(producer => produce(producer, this.modifier, items, this.storage, delta));
-    this.items.set(items);
+    const storage = this.storage.get();
+    producers.map(producer => produce(producer, this.modifier, this.items, storage, delta));
     this.producers.set(producers);
+    this.storage.set(storage);
   }
 
   getSubscribable(id: ESubscribables) {
     switch(id) {
-      case ESubscribables.ITEM:
-        return this.items;
       case ESubscribables.PRODUCER:
         return this.producers;
+        case ESubscribables.STORE:
+          return this.storage;
       default:
         throw Error("Bad state");
     }
@@ -65,22 +65,39 @@ export class SimulationControl {
   getItems(getAmounts: true, filter: number): IGetItem[];
   getItems(getAmounts: false, filter: number): IItem[];
   getItems(getAmounts: boolean, filter: number): IItem[] {
-    return Object.values(this.items.get()).filter((item) => (filter & item.storageCategory) > 0).map((item) => (
+    const storage = this.storage.get();
+    return Object.values(this.items).filter((item) => (filter & item.storageCategory) > 0).map((item) => (
       {
         ...item,
         ...(getAmounts ? {
-          current: this.storage[item.storageCategory].stored[item.id] ?? 0,
-          ...(this.storage[item.storageCategory].reserved[item.id] ? {max: this.storage[item.storageCategory].reserved[item.id]} : {})
+          current: storage[item.storageCategory].stored[item.id] ?? 0,
+          ...(storage[item.storageCategory].reserved[item.id] ? {max: storage[item.storageCategory].reserved[item.id]} : {})
         }: {})
       }));
   }
 
-  getItem(key: number) {
-    return this.items.get()[key];
+  getItem(key: number, getAmounts: true, free: number): IGetItem;
+  getItem(key: number, getAmounts: true): IGetItem;
+  getItem(key: number, getAmounts: false): IItem;
+  getItem(key: number, getAmounts: boolean, free?: number): IItem {
+    const item = this.items[key];
+    if (getAmounts === false) {
+      return item;
+    }
+    const storage = this.storage.get();
+    const reserved = storage[item.storageCategory].reserved[item.id];
+    return {
+      ...item,
+      ...(reserved ? {
+        current: storage[item.storageCategory].stored[item.id] ?? 0,
+        max: storage[item.storageCategory].reserved[item.id] ?? free,
+      } : {
+        current: storage[item.storageCategory].stored[item.id] ?? 0,}),
+    };
   }
 
   getProducers() {
-    const items = this.items.get();
+    const items = this.items;
     return Object.values(this.producers.get()).map((producer) => ({
       ...producer,
       time: getTime(producer, this.modifier, items),
@@ -94,15 +111,16 @@ export class SimulationControl {
   }
 
   getStore(key: EStorageCategory) {
+    const storage = this.storage.get();
     return {
-      ...this.storage[key],
-      used: this.storage[key].available - getFree(this.storage[key])
+      ...storage[key],
+      used: storage[key].available - getFree(storage[key])
     };
   }
 
   reset() {
     const {storage, modifier, purchasedResearch} = reset();
-    this.storage = storage;
+    this.storage.set(storage);
     this.modifier = modifier;
     this.purchasedResearch = purchasedResearch;
   }
